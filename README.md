@@ -8,6 +8,7 @@ Technologies Being used
 1) Angular
 2) Hibernate
 3) AWS
+4) Spring
 
 
 EACH PROJECT MUST HAVE 6 CORE FUNCTIONALITIES (login can be one)
