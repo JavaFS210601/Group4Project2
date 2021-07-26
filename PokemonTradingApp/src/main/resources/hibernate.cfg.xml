@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- This is our XML version -->
+
+<!-- This is our doctype declaration -->
+<!DOCTYPE hibernate-configuration PUBLIC 
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        
+<!-- This file is what we will use to configure hibernate! -->
+
+<hibernate-configuration>
+
+	<session-factory>
+	
+	<!-- JDBC Credentials -->
+	<property name="hibernate.connection.username">postgres</property>
+	<property name="hibernate.connection.password">Warminster11</property>
+	<property name="hibernate.connection.url">jdbc:postgresql://mydatabase.cednqqbk1n5a.us-east-2.rds.amazonaws.com:5432/mydatabase?currentSchema=p2</property>
+	<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+	
+	<!-- Hibernate Properties -->
+	<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+	<property name="hibernate.default_schema">Hibernate</property>
+	
+	<!-- Hibernate Console Output --> <!-- These will let us see our sql in the console -->
+	<property name="hibernate.show_sql">true</property>
+	<property name="hibernate.format_sql">true</property>
+	
+	<!-- DDL --> <!-- Remember create drops your tables at runtime, update will simply update them -->
+	<property name="hibernate.hbm2ddl.auto">update</property>
+	<!-- Update won't drop your tables, they'll update them with any changes -->
+	
+	<!-- Map our classes here --> <!-- The databse won't recognize them as tables if you don't -->
+	<mapping class="com.revature.models.Book"/>
+	<mapping class="com.revature.models.Author"/>
+	
+	</session-factory>
+
+</hibernate-configuration>
