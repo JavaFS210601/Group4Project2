@@ -1,14 +1,10 @@
 package com.revature.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,14 +27,6 @@ public class PokeUsers {
 	
 	@Column(name = "poke_contact_info")
 	private String poke_contact_info;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "offer_id") //specify which author column to create a relationship on
-	private OfferPool offerPool;
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "inventory_id") //specify which author column to create a relationship on
-	private InventoryJoin inventoryJoin;
 
 	
 	//Boiler Plate Code --------------------------------------------------------------------------------
@@ -50,27 +38,22 @@ public class PokeUsers {
 
 
 	public PokeUsers(int poke_user_id, String poke_username, String poke_password, String poke_full_name,
-			String poke_contact_info, OfferPool offerPool, InventoryJoin inventoryJoin) {
+			String poke_contact_info) {
 		super();
 		this.poke_user_id = poke_user_id;
 		this.poke_username = poke_username;
 		this.poke_password = poke_password;
 		this.poke_full_name = poke_full_name;
 		this.poke_contact_info = poke_contact_info;
-		this.offerPool = offerPool;
-		this.inventoryJoin = inventoryJoin;
 	}
 
 
-	public PokeUsers(String poke_username, String poke_password, String poke_full_name, String poke_contact_info,
-			OfferPool offerPool, InventoryJoin inventoryJoin) {
+	public PokeUsers(String poke_username, String poke_password, String poke_full_name, String poke_contact_info) {
 		super();
 		this.poke_username = poke_username;
 		this.poke_password = poke_password;
 		this.poke_full_name = poke_full_name;
 		this.poke_contact_info = poke_contact_info;
-		this.offerPool = offerPool;
-		this.inventoryJoin = inventoryJoin;
 	}
 
 
@@ -78,7 +61,7 @@ public class PokeUsers {
 	public String toString() {
 		return "PokeUsers [poke_user_id=" + poke_user_id + ", poke_username=" + poke_username + ", poke_password="
 				+ poke_password + ", poke_full_name=" + poke_full_name + ", poke_contact_info=" + poke_contact_info
-				+ ", offerPool=" + offerPool + ", inventoryJoin=" + inventoryJoin + "]";
+				+ "]";
 	}
 
 
@@ -86,8 +69,6 @@ public class PokeUsers {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((inventoryJoin == null) ? 0 : inventoryJoin.hashCode());
-		result = prime * result + ((offerPool == null) ? 0 : offerPool.hashCode());
 		result = prime * result + ((poke_contact_info == null) ? 0 : poke_contact_info.hashCode());
 		result = prime * result + ((poke_full_name == null) ? 0 : poke_full_name.hashCode());
 		result = prime * result + ((poke_password == null) ? 0 : poke_password.hashCode());
@@ -106,16 +87,6 @@ public class PokeUsers {
 		if (getClass() != obj.getClass())
 			return false;
 		PokeUsers other = (PokeUsers) obj;
-		if (inventoryJoin == null) {
-			if (other.inventoryJoin != null)
-				return false;
-		} else if (!inventoryJoin.equals(other.inventoryJoin))
-			return false;
-		if (offerPool == null) {
-			if (other.offerPool != null)
-				return false;
-		} else if (!offerPool.equals(other.offerPool))
-			return false;
 		if (poke_contact_info == null) {
 			if (other.poke_contact_info != null)
 				return false;
@@ -190,26 +161,7 @@ public class PokeUsers {
 	public void setPoke_contact_info(String poke_contact_info) {
 		this.poke_contact_info = poke_contact_info;
 	}
-
-
-	public OfferPool getOfferPool() {
-		return offerPool;
-	}
-
-
-	public void setOfferPool(OfferPool offerPool) {
-		this.offerPool = offerPool;
-	}
-
-
-	public InventoryJoin getInventoryJoin() {
-		return inventoryJoin;
-	}
-
-
-	public void setInventoryJoin(InventoryJoin inventoryJoin) {
-		this.inventoryJoin = inventoryJoin;
-	}
 	
-
+	
+	
 }

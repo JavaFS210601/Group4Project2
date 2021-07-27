@@ -32,12 +32,9 @@ public class OfferPool {
 	@Column(name = "reply_poke")
 	private int reply_poke;
 	
-	@Column(name = "offer_status")
-	private int offer_status;
-	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "offer_status_id") //specify which author column to create a relationship on
-	private OfferStatus offerStatus;
+	private int offer_status_id;
 
 	
 	//Boiler Plate Code --------------------------------------------------------------------------------
@@ -49,35 +46,32 @@ public class OfferPool {
 
 
 	public OfferPool(int offer_pool_id, int offer_owner, int offer_poke, int reply_owner, int reply_poke,
-			int offer_status, OfferStatus offerStatus) {
+			int offer_status_id) {
 		super();
 		this.offer_pool_id = offer_pool_id;
 		this.offer_owner = offer_owner;
 		this.offer_poke = offer_poke;
 		this.reply_owner = reply_owner;
 		this.reply_poke = reply_poke;
-		this.offer_status = offer_status;
-		this.offerStatus = offerStatus;
+		this.offer_status_id = offer_status_id;
 	}
 
 
-	public OfferPool(int offer_owner, int offer_poke, int reply_owner, int reply_poke, int offer_status,
-			OfferStatus offerStatus) {
+	public OfferPool(int offer_owner, int offer_poke, int reply_owner, int reply_poke, int offer_status_id) {
 		super();
 		this.offer_owner = offer_owner;
 		this.offer_poke = offer_poke;
 		this.reply_owner = reply_owner;
 		this.reply_poke = reply_poke;
-		this.offer_status = offer_status;
-		this.offerStatus = offerStatus;
+		this.offer_status_id = offer_status_id;
 	}
 
 
 	@Override
 	public String toString() {
 		return "OfferPool [offer_pool_id=" + offer_pool_id + ", offer_owner=" + offer_owner + ", offer_poke="
-				+ offer_poke + ", reply_owner=" + reply_owner + ", reply_poke=" + reply_poke + ", offer_status="
-				+ offer_status + ", offerStatus=" + offerStatus + "]";
+				+ offer_poke + ", reply_owner=" + reply_owner + ", reply_poke=" + reply_poke + ", offer_status_id="
+				+ offer_status_id + "]";
 	}
 
 
@@ -85,11 +79,10 @@ public class OfferPool {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((offerStatus == null) ? 0 : offerStatus.hashCode());
 		result = prime * result + offer_owner;
 		result = prime * result + offer_poke;
 		result = prime * result + offer_pool_id;
-		result = prime * result + offer_status;
+		result = prime * result + offer_status_id;
 		result = prime * result + reply_owner;
 		result = prime * result + reply_poke;
 		return result;
@@ -105,18 +98,13 @@ public class OfferPool {
 		if (getClass() != obj.getClass())
 			return false;
 		OfferPool other = (OfferPool) obj;
-		if (offerStatus == null) {
-			if (other.offerStatus != null)
-				return false;
-		} else if (!offerStatus.equals(other.offerStatus))
-			return false;
 		if (offer_owner != other.offer_owner)
 			return false;
 		if (offer_poke != other.offer_poke)
 			return false;
 		if (offer_pool_id != other.offer_pool_id)
 			return false;
-		if (offer_status != other.offer_status)
+		if (offer_status_id != other.offer_status_id)
 			return false;
 		if (reply_owner != other.reply_owner)
 			return false;
@@ -176,25 +164,15 @@ public class OfferPool {
 	}
 
 
-	public int getOffer_status() {
-		return offer_status;
+	public int getOffer_status_id() {
+		return offer_status_id;
 	}
 
 
-	public void setOffer_status(int offer_status) {
-		this.offer_status = offer_status;
+	public void setOffer_status_id(int offer_status_id) {
+		this.offer_status_id = offer_status_id;
 	}
 
 
-	public OfferStatus getOfferStatus() {
-		return offerStatus;
-	}
-
-
-	public void setOfferStatus(OfferStatus offerStatus) {
-		this.offerStatus = offerStatus;
-	}
-	
-	
 	
 }

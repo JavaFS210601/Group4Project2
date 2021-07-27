@@ -26,12 +26,9 @@ public class InventoryJoin {
 	@Column(name = "poke_id_fk")
 	private String poke_id_fk;
 	
-	@Column(name = "poke_status")
-	private String poke_status;
-	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "poke_status_id") //specify which author column to create a relationship on
-	private PokeStatus pokeStatus;
+	private int poke_status_id;
 
 	
 	//Boiler Plate Code --------------------------------------------------------------------------------
@@ -42,30 +39,27 @@ public class InventoryJoin {
 	}
 
 
-	public InventoryJoin(int inventory_id, String user_id_fk, String poke_id_fk, String poke_status,
-			PokeStatus pokeStatus) {
+	public InventoryJoin(int inventory_id, String user_id_fk, String poke_id_fk, int poke_status_id) {
 		super();
 		this.inventory_id = inventory_id;
 		this.user_id_fk = user_id_fk;
 		this.poke_id_fk = poke_id_fk;
-		this.poke_status = poke_status;
-		this.pokeStatus = pokeStatus;
+		this.poke_status_id = poke_status_id;
 	}
 
 
-	public InventoryJoin(String user_id_fk, String poke_id_fk, String poke_status, PokeStatus pokeStatus) {
+	public InventoryJoin(String user_id_fk, String poke_id_fk, int poke_status_id) {
 		super();
 		this.user_id_fk = user_id_fk;
 		this.poke_id_fk = poke_id_fk;
-		this.poke_status = poke_status;
-		this.pokeStatus = pokeStatus;
+		this.poke_status_id = poke_status_id;
 	}
 
 
 	@Override
 	public String toString() {
 		return "InventoryJoin [inventory_id=" + inventory_id + ", user_id_fk=" + user_id_fk + ", poke_id_fk="
-				+ poke_id_fk + ", poke_status=" + poke_status + ", pokeStatus=" + pokeStatus + "]";
+				+ poke_id_fk + ", poke_status_id=" + poke_status_id + "]";
 	}
 
 
@@ -74,9 +68,8 @@ public class InventoryJoin {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + inventory_id;
-		result = prime * result + ((pokeStatus == null) ? 0 : pokeStatus.hashCode());
 		result = prime * result + ((poke_id_fk == null) ? 0 : poke_id_fk.hashCode());
-		result = prime * result + ((poke_status == null) ? 0 : poke_status.hashCode());
+		result = prime * result + poke_status_id;
 		result = prime * result + ((user_id_fk == null) ? 0 : user_id_fk.hashCode());
 		return result;
 	}
@@ -93,20 +86,12 @@ public class InventoryJoin {
 		InventoryJoin other = (InventoryJoin) obj;
 		if (inventory_id != other.inventory_id)
 			return false;
-		if (pokeStatus == null) {
-			if (other.pokeStatus != null)
-				return false;
-		} else if (!pokeStatus.equals(other.pokeStatus))
-			return false;
 		if (poke_id_fk == null) {
 			if (other.poke_id_fk != null)
 				return false;
 		} else if (!poke_id_fk.equals(other.poke_id_fk))
 			return false;
-		if (poke_status == null) {
-			if (other.poke_status != null)
-				return false;
-		} else if (!poke_status.equals(other.poke_status))
+		if (poke_status_id != other.poke_status_id)
 			return false;
 		if (user_id_fk == null) {
 			if (other.user_id_fk != null)
@@ -147,25 +132,15 @@ public class InventoryJoin {
 	}
 
 
-	public String getPoke_status() {
-		return poke_status;
+	public int getPoke_status_id() {
+		return poke_status_id;
 	}
 
 
-	public void setPoke_status(String poke_status) {
-		this.poke_status = poke_status;
+	public void setPoke_status_id(int poke_status_id) {
+		this.poke_status_id = poke_status_id;
 	}
 
 
-	public PokeStatus getPokeStatus() {
-		return pokeStatus;
-	}
-
-
-	public void setPokeStatus(PokeStatus pokeStatus) {
-		this.pokeStatus = pokeStatus;
-	}
-	
-	
 
 }

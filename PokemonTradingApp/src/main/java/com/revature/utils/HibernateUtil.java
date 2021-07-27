@@ -3,13 +3,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+
+//REMOVE AT SOME POINT
+
+
 //We use this class in order to get our sessions! Just like how in JDBC, our ConnectionUtil gets Connections
 //Sessions manage the actual connection to our database.
 public class HibernateUtil {
 	
 	//We use the SessionFactory interface in order to get a Session. 
 	//Note that we point it to the hibernate.cfg.xml file where our database credentials etc. are stored.
-	private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+	private static SessionFactory sf = new Configuration().configure("application.properties").buildSessionFactory();
 	
 	//get Session objects from our SessionFactory
 	//We only want one session in this application - hence private static - it's a singleton!
