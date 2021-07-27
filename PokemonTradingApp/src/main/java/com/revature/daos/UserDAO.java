@@ -1,9 +1,21 @@
 package com.revature.daos;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.hibernate.Session;
 
 import com.revature.models.PokeUsers;
+import com.revature.utils.HibernateUtil;
 
-public interface UserDAO extends JpaRepository<PokeUsers, Integer>{
+public class UserDAO implements UserDAOInterface {
+	
+	@Override
+	public void addUser(PokeUsers newUser) {
+
+		Session ses = HibernateUtil.getSession(); 
+		
+		ses.save(newUser); 
+		
+		HibernateUtil.closeSession();
+		
+	}
 
 }
