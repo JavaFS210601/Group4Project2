@@ -61,4 +61,18 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		
 	}
 
+	@Override
+	public List<OfferPool> getOffersByStatus(int offerStatus) {
+		// TODO Auto-generated method stub
+		
+		Session session = HibernateUtil.getSession();
+		
+		List<OfferPool> myOffers =  session.createQuery("FROM offer_pool WHERE offer_status_id = ?1").setParameter(1,  offerStatus).list();
+		HibernateUtil.closeSession();
+		
+		// TODO Auto-generated method stub
+		return myOffers;
+		
+	}
+
 }

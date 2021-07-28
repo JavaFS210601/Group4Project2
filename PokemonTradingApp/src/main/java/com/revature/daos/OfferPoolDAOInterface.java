@@ -19,5 +19,7 @@ public interface OfferPoolDAOInterface {
 	
 	public void replyOffer(OfferPool addToOffer, PokeUsers user, int pokemon_id);
 	
+	public List<OfferPool> getOffersByStatus(int offerStatus);
+	
 
 }
