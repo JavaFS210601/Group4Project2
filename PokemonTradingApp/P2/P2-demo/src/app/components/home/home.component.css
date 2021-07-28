@@ -1,0 +1,14 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#search-bar {
+  width: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 50vw;
+  display: block;
+  text-align: center;
+}
