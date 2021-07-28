@@ -13,7 +13,7 @@ public class HibernateUtil {
 	
 	//We use the SessionFactory interface in order to get a Session. 
 	//Note that we point it to the hibernate.cfg.xml file where our database credentials etc. are stored.
-	private static SessionFactory sf = new Configuration().configure("application.properties").buildSessionFactory();
+	private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 	
 	//get Session objects from our SessionFactory
 	//We only want one session in this application - hence private static - it's a singleton!
@@ -24,6 +24,7 @@ public class HibernateUtil {
 	public static Session getSession() {
 		if (ses == null) { //if there isn't a session...
 			ses = sf.openSession(); //get one!
+			System.out.println("hello");
 		}
 		return ses; //return a session Object
 	}

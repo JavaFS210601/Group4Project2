@@ -13,7 +13,7 @@ public class Launcher {
 		PokeUsers pu = new PokeUsers();
 		pu.setPoke_username(null);
 		
-		PokeUsers p1 = new PokeUsers(1, "pokemon", "password", "Sid The Sloth", "8881111234");
+		PokeUsers p1 = new PokeUsers("muffin man", "1235","john cena", "1234567894");
 		
 		uDAO.addUser(p1);
 	}
