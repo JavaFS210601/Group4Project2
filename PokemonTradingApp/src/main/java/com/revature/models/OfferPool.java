@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "offerPool")
+@Table(name = "offer_pool")
 public class OfferPool {
 
 	@Id
@@ -34,7 +34,7 @@ public class OfferPool {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "offer_status_id") //specify which author column to create a relationship on
-	private int offer_status_id;
+	private OfferPool offer_status_id;
 
 	
 	//Boiler Plate Code --------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ public class OfferPool {
 
 
 	public OfferPool(int offer_pool_id, int offer_owner, int offer_poke, int reply_owner, int reply_poke,
-			int offer_status_id) {
+			OfferPool offer_status_id) {
 		super();
 		this.offer_pool_id = offer_pool_id;
 		this.offer_owner = offer_owner;
@@ -57,7 +57,7 @@ public class OfferPool {
 	}
 
 
-	public OfferPool(int offer_owner, int offer_poke, int reply_owner, int reply_poke, int offer_status_id) {
+	public OfferPool(int offer_owner, int offer_poke, int reply_owner, int reply_poke, OfferPool offer_status_id) {
 		super();
 		this.offer_owner = offer_owner;
 		this.offer_poke = offer_poke;
@@ -82,7 +82,7 @@ public class OfferPool {
 		result = prime * result + offer_owner;
 		result = prime * result + offer_poke;
 		result = prime * result + offer_pool_id;
-		result = prime * result + offer_status_id;
+		result = prime * result + ((offer_status_id == null) ? 0 : offer_status_id.hashCode());
 		result = prime * result + reply_owner;
 		result = prime * result + reply_poke;
 		return result;
@@ -104,7 +104,10 @@ public class OfferPool {
 			return false;
 		if (offer_pool_id != other.offer_pool_id)
 			return false;
-		if (offer_status_id != other.offer_status_id)
+		if (offer_status_id == null) {
+			if (other.offer_status_id != null)
+				return false;
+		} else if (!offer_status_id.equals(other.offer_status_id))
 			return false;
 		if (reply_owner != other.reply_owner)
 			return false;
@@ -164,12 +167,12 @@ public class OfferPool {
 	}
 
 
-	public int getOffer_status_id() {
+	public OfferPool getOffer_status_id() {
 		return offer_status_id;
 	}
 
 
-	public void setOffer_status_id(int offer_status_id) {
+	public void setOffer_status_id(OfferPool offer_status_id) {
 		this.offer_status_id = offer_status_id;
 	}
 
