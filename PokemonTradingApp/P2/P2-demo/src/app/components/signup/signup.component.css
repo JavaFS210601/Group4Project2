@@ -1,0 +1,64 @@
+.login-logo {
+  position: absolute;
+  display: inline;
+  width: 350px;
+  margin-left: 45vw;
+  font-family: "Segoe UI", Roboto, "San Francisco";
+}
+
+.logo {
+  width: 350px;
+}
+
+h3 {
+  position: relative;
+  margin-left: 70px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 600;
+  word-spacing: 3px;
+  margin-left: 55px;
+}
+
+input[type="text"],
+input[type="password"] {
+  display: block;
+  background-color: #fff;
+
+  border: 1.5px solid rgb(200, 200, 200);
+  width: 470px;
+  padding: 10px 40px;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+  font-family: "Segoe UI";
+  font-size: 15px;
+}
+
+.form {
+  position: absolute;
+  margin-left: 42vw;
+  margin-top: 27vh;
+}
+button {
+  border: none;
+  background-color: #1877f2;
+  color: white;
+  margin: auto;
+  width: 283px;
+  display: block;
+  border-radius: 5px;
+  padding: 10px 0px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.new {
+  margin-top: 15px;
+  width: 180px;
+  font-size: 14px;
+  background-color: #42b72a;
+  text-align: center;
+}
