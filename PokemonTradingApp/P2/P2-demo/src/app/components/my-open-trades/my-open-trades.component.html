@@ -1,1 +1,25 @@
-<p>my-open-trades works!</p>
+<div id="notshown2" style="text-align: center;" [hidden] = "hiddenValue">
+    <h2>No Open Trades.</h2>
+</div>
+
+<div style="text-align: center;">
+
+    <table class="table table-dark" id="table">
+        <thead id="t-head">
+            <tr>
+                <th scope="col" id='head1'>Offer ID</th>
+                <th scope="col" id='head1'>Offer Owner</th>
+                <th scope="col" id='head1'>Offered Pokemon</th>
+
+
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let offer of offerArray" id="body">
+            <th scope="row">{{offer.id}}</th>
+            <td>{{offer.user}}</td>
+            <td>{{offer.pokemon}}</td>
+
+        </tbody>
+    </table>
+</div>
