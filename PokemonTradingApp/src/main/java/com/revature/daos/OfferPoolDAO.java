@@ -2,7 +2,9 @@ package com.revature.daos;
 
 import java.util.List;
 
+//import org.hibernate.Query;
 import org.hibernate.Session;
+
 
 import com.revature.models.OfferPool;
 import com.revature.models.PokeUsers;
@@ -50,13 +52,21 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 	}
 
 	@Override
-	public OfferPool newOffer(OfferPool addOffer) {
+	public void newOffer(OfferPool addOffer) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		
+		session.save(addOffer);
+		
+		HibernateUtil.closeSession();
+		
+		
 	}
 
 	@Override
 	public void replyOffer(OfferPool addToOffer, PokeUsers user, int pokemon_id) {
+		
+		
 		// TODO Auto-generated method stub
 		
 	}
@@ -72,6 +82,22 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		
 		// TODO Auto-generated method stub
 		return myOffers;
+		
+	}
+
+	@Override
+	public void cancelOffer(OfferPool deleteThis) {
+		
+//		int deleteID = deleteThis.getOffer_pool_id();
+//
+//		Session session = HibernateUtil.getSession();
+//		Query q = session.createQuery("DELETE from offer_pool WHERE offer_pool_id = ?1").setParameter(1,  deleteID);
+//		
+//		
+//		HibernateUtil.closeSession();
+		// TODO Auto-generated method stub
+		
+		
 		
 	}
 
