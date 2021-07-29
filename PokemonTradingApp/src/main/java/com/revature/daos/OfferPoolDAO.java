@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.revature.models.InventoryJoin;
 import com.revature.models.OfferPool;
 import com.revature.models.PokeUsers;
 import com.revature.utils.HibernateUtil;
@@ -71,11 +72,15 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 	}
 
 	@Override
-	public void replyOffer(OfferPool addToOffer, PokeUsers user, int pokemon_id) {
+	public void replyOffer(OfferPool addToOffer, InventoryJoin replyOffer) {
 		
+		Session session = HibernateUtil.getSession();
 		
-		// TODO Auto-generated method stub
+		addToOffer.setReply_inventory_id(replyOffer);
 		
+		session.merge(addToOffer);
+		HibernateUtil.closeSession();
+
 	}
 
 	@Override
