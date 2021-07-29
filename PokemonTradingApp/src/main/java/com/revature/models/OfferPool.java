@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,17 +21,13 @@ public class OfferPool {
 	@Column(name = "offer_pool_id")
 	private int offer_pool_id;
 	
-	@Column(name = "offer_owner")
-	private int offer_owner;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "primary_inventory_id")
+	private InventoryJoin primary_inventory_id;
 	
-	@Column(name = "offer_poke")
-	private int offer_poke;
-	
-	@Column(name = "reply_owner")
-	private int reply_owner;
-	
-	@Column(name = "reply_poke")
-	private int reply_poke;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "reply_inventory__id")
+	private InventoryJoin reply_inventory_id;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "offer_status_id") //specify which author column to create a relationship on
@@ -45,33 +42,28 @@ public class OfferPool {
 	}
 
 
-	public OfferPool(int offer_pool_id, int offer_owner, int offer_poke, int reply_owner, int reply_poke,
+	public OfferPool(int offer_pool_id, InventoryJoin primary_inventory_id, InventoryJoin reply_inventory_id,
 			OfferPool offer_status_id) {
 		super();
 		this.offer_pool_id = offer_pool_id;
-		this.offer_owner = offer_owner;
-		this.offer_poke = offer_poke;
-		this.reply_owner = reply_owner;
-		this.reply_poke = reply_poke;
+		this.primary_inventory_id = primary_inventory_id;
+		this.reply_inventory_id = reply_inventory_id;
 		this.offer_status_id = offer_status_id;
 	}
 
 
-	public OfferPool(int offer_owner, int offer_poke, int reply_owner, int reply_poke, OfferPool offer_status_id) {
+	public OfferPool(InventoryJoin primary_inventory_id, InventoryJoin reply_inventory_id, OfferPool offer_status_id) {
 		super();
-		this.offer_owner = offer_owner;
-		this.offer_poke = offer_poke;
-		this.reply_owner = reply_owner;
-		this.reply_poke = reply_poke;
+		this.primary_inventory_id = primary_inventory_id;
+		this.reply_inventory_id = reply_inventory_id;
 		this.offer_status_id = offer_status_id;
 	}
 
 
 	@Override
 	public String toString() {
-		return "OfferPool [offer_pool_id=" + offer_pool_id + ", offer_owner=" + offer_owner + ", offer_poke="
-				+ offer_poke + ", reply_owner=" + reply_owner + ", reply_poke=" + reply_poke + ", offer_status_id="
-				+ offer_status_id + "]";
+		return "OfferPool [offer_pool_id=" + offer_pool_id + ", primary_inventory_id=" + primary_inventory_id
+				+ ", reply_inventory_id=" + reply_inventory_id + ", offer_status_id=" + offer_status_id + "]";
 	}
 
 
@@ -79,12 +71,10 @@ public class OfferPool {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + offer_owner;
-		result = prime * result + offer_poke;
 		result = prime * result + offer_pool_id;
 		result = prime * result + ((offer_status_id == null) ? 0 : offer_status_id.hashCode());
-		result = prime * result + reply_owner;
-		result = prime * result + reply_poke;
+		result = prime * result + ((primary_inventory_id == null) ? 0 : primary_inventory_id.hashCode());
+		result = prime * result + ((reply_inventory_id == null) ? 0 : reply_inventory_id.hashCode());
 		return result;
 	}
 
@@ -98,10 +88,6 @@ public class OfferPool {
 		if (getClass() != obj.getClass())
 			return false;
 		OfferPool other = (OfferPool) obj;
-		if (offer_owner != other.offer_owner)
-			return false;
-		if (offer_poke != other.offer_poke)
-			return false;
 		if (offer_pool_id != other.offer_pool_id)
 			return false;
 		if (offer_status_id == null) {
@@ -109,9 +95,15 @@ public class OfferPool {
 				return false;
 		} else if (!offer_status_id.equals(other.offer_status_id))
 			return false;
-		if (reply_owner != other.reply_owner)
+		if (primary_inventory_id == null) {
+			if (other.primary_inventory_id != null)
+				return false;
+		} else if (!primary_inventory_id.equals(other.primary_inventory_id))
 			return false;
-		if (reply_poke != other.reply_poke)
+		if (reply_inventory_id == null) {
+			if (other.reply_inventory_id != null)
+				return false;
+		} else if (!reply_inventory_id.equals(other.reply_inventory_id))
 			return false;
 		return true;
 	}
@@ -127,43 +119,23 @@ public class OfferPool {
 	}
 
 
-	public int getOffer_owner() {
-		return offer_owner;
+	public InventoryJoin getPrimary_inventory_id() {
+		return primary_inventory_id;
 	}
 
 
-	public void setOffer_owner(int offer_owner) {
-		this.offer_owner = offer_owner;
+	public void setPrimary_inventory_id(InventoryJoin primary_inventory_id) {
+		this.primary_inventory_id = primary_inventory_id;
 	}
 
 
-	public int getOffer_poke() {
-		return offer_poke;
+	public InventoryJoin getReply_inventory_id() {
+		return reply_inventory_id;
 	}
 
 
-	public void setOffer_poke(int offer_poke) {
-		this.offer_poke = offer_poke;
-	}
-
-
-	public int getReply_owner() {
-		return reply_owner;
-	}
-
-
-	public void setReply_owner(int reply_owner) {
-		this.reply_owner = reply_owner;
-	}
-
-
-	public int getReply_poke() {
-		return reply_poke;
-	}
-
-
-	public void setReply_poke(int reply_poke) {
-		this.reply_poke = reply_poke;
+	public void setReply_inventory_id(InventoryJoin reply_inventory_id) {
+		this.reply_inventory_id = reply_inventory_id;
 	}
 
 
@@ -175,7 +147,6 @@ public class OfferPool {
 	public void setOffer_status_id(OfferPool offer_status_id) {
 		this.offer_status_id = offer_status_id;
 	}
-
 
 	
 }
