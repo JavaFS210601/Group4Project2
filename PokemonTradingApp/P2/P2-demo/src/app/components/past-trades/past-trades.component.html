@@ -1,1 +1,30 @@
-<p>past-trades works!</p>
+<div id="notshown2" style="text-align: center;"[hidden] = "hiddenValue">
+    <h2>No Past Trades.</h2>
+</div>
+
+<div style="text-align: center;"> 
+
+     <table class="table table-dark" id="table">
+        <thead id="t-head">
+            <tr>
+                <th scope="col" id='head1'>Offer ID</th>
+                <th scope="col" id='head1'>Offer Owner</th>
+                <th scope="col" id='head1'>Offered Pokemon</th>
+                <th scope="col" id='head1'>Trade Made With</th>
+                <th scope="col" id='head1'>Traded Pokemon</th>
+                
+            </tr>
+        </thead>
+            
+        <tbody *ngFor="let offer of offerArray" id="body">
+            <th scope="row">{{offer.id}}</th>
+            <td>{{offer.user}}</td>
+            <td>{{offer.pokemon}}</td>
+            <td>{{offer.second}}</td>
+            <td>{{offer.offeredPoke}}</td>
+        </tbody>
+    </table> 
+     </div>
+
+    
+

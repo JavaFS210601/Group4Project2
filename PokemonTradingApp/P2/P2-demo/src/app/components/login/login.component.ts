@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username:string = "";
-  password:string ="";
+  usern:string = "";
+  userp:string ="";
   
 
   constructor(public router:Router) { }
@@ -17,10 +17,27 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
-    if(this.username==='username' && this.password==='password'){
-      console.log("success!");
-      this.router.navigate(['home']);
+   async submit() {
+
+    let url;
+
+    let user = {
+        username: this.usern,
+        password: this.userp
     }
+
+    let response = await fetch (url + "login",{
+
+        method: "POST",
+
+        body: JSON.stringify(user)
+
+    });
+    
+      if(response.status === 200){
+        this.router.navigate(['home']);
+      }
+      
+    
   }
 }
