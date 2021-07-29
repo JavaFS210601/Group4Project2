@@ -15,11 +15,13 @@ public interface OfferPoolDAOInterface {
 	
 	public void setOfferStatus(OfferPool offer, int newStatus);
 	
-	public OfferPool newOffer(OfferPool addOffer);
+	public void newOffer(OfferPool addOffer);
 	
 	public void replyOffer(OfferPool addToOffer, PokeUsers user, int pokemon_id);
 	
 	public List<OfferPool> getOffersByStatus(int offerStatus);
+	
+	public void cancelOffer(OfferPool deleteThis);
 	
 
 }
