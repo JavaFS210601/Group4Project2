@@ -13,7 +13,7 @@ public interface OfferPoolDAOInterface {
 	
 	public List<OfferPool> getOffersByUser(PokeUsers user);
 	
-	public void setOfferStatus(OfferPool offer, int newStatus);
+	public void setOfferStatus(OfferPool offer, OfferPool newStatus);
 	
 	public void newOffer(OfferPool addOffer);
 	

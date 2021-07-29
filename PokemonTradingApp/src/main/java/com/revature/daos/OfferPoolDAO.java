@@ -2,7 +2,7 @@ package com.revature.daos;
 
 import java.util.List;
 
-//import org.hibernate.Query;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +39,8 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 	public List<OfferPool> getOffersByUser(PokeUsers user) {
 		Session session = HibernateUtil.getSession();
 		
-		List<OfferPool> myOffers =  session.createQuery("FROM offer_pool WHERE offer_owner = ?1").setParameter(1,  user.getPoke_user_id()).list();
+		
+		List<OfferPool> myOffers =  session.createQuery("FROM offer_pool LEFT JOIN inventory_join ON user_id_fk = ?1 WHERE user_id_fk = ?1").setParameter(1,  user.getPoke_user_id()).list();
 		HibernateUtil.closeSession();
 		
 		// TODO Auto-generated method stub
@@ -47,8 +48,13 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 	}
 
 	@Override
-	public void setOfferStatus(OfferPool offer, int newStatus) {
-		// TODO Auto-generated method stub
+	public void setOfferStatus(OfferPool offer, OfferPool newStatus) {
+		Session session = HibernateUtil.getSession();
+	offer.setOffer_status_id(newStatus);
+	
+	Query q = session.createQuery("UPDATE offer_pool SET offer_status_id = ?1 WHERE offer_pool_id = ?2").setParameter(1,  newStatus).setParameter(2, offer.getOffer_pool_id());
+		
+		HibernateUtil.closeSession();
 		
 	}
 
@@ -89,13 +95,13 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 	@Override
 	public void cancelOffer(OfferPool deleteThis) {
 		
-//		int deleteID = deleteThis.getOffer_pool_id();
-//
-//		Session session = HibernateUtil.getSession();
-//		Query q = session.createQuery("DELETE from offer_pool WHERE offer_pool_id = ?1").setParameter(1,  deleteID);
-//		
-//		
-//		HibernateUtil.closeSession();
+		int deleteID = deleteThis.getOffer_pool_id();
+
+		Session session = HibernateUtil.getSession();
+		Query q = session.createQuery("DELETE from offer_pool WHERE offer_pool_id = ?1").setParameter(1,  deleteID);
+		
+		
+		HibernateUtil.closeSession();
 		// TODO Auto-generated method stub
 		
 		
