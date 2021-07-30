@@ -38,6 +38,18 @@ public class InventoryDAO implements InventoryDAOInterface{
 		
 		return myInventories;
 	}
+
+	@Override
+	public InventoryJoin addPokemon(InventoryJoin newPokemon) {
+		
+		Session ses = HibernateUtil.getSession();
+		
+		ses.save(newPokemon);
+		
+		HibernateUtil.closeSession();
+
+		return null;
+	}
 	
 	
 
