@@ -4,6 +4,7 @@ import { Pokemon } from 'src/app/models/pokemon';
 
 
 import { PokeFetchService } from 'src/app/services/poke-fetch.service';
+import { TransferServiceService } from 'src/app/services/transfer-service.service';
 
 @Component({
   selector: 'app-open-trades',
@@ -11,43 +12,51 @@ import { PokeFetchService } from 'src/app/services/poke-fetch.service';
   styleUrls: ['./open-trades.component.css']
 })
 export class OpenTradesComponent implements OnInit {
-  public pokemon:any = null;
+  public pokemon: any = null;
   // holder =this.get
   offerArray = this.getArray();
-  constructor(private ps:PokeFetchService) { 
+  constructor(private ps: PokeFetchService,
+    private ts: TransferServiceService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
 
   }
 
-   getArray():any[]{
-    let Array:any=[];
-    let sprite="";
-    let name="";
-    for(let i=0;i<13;i++){
-       this.ps.getPokemonFromApi(i+1).subscribe(
+  getArray(): any[] {
+    let Array: any = [];
+    let sprite = "";
+    let name = "";
+    for (let i = 0; i < 13; i++) {
+      this.ps.getPokemonFromApi(i + 1).subscribe(
 
-      (data:Pokemon) => { this.pokemon=data;
-                        sprite= this.pokemon.sprites.front_shiny;
-                        name=this.pokemon.name;
-                        console.log(sprite);
-                        var offer={
-                            id:i+1,
-                            user:i+1,
-                            pokemon: name,
-                            objsprites: sprite
-                        }
-                        Array[i]=offer;
-                        }, 
-      () => {
-        this.pokemon = null;
-        console.log("Something is wrong I can feel it (pokemon retrieval).");
-      }
+        (data: Pokemon) => {
+          this.pokemon = data;
+          sprite = this.pokemon.sprites.front_shiny;
+          name = this.pokemon.name;
+          console.log(sprite);
+          var offer = {
+            id: i + 1,
+            user: i + 1,
+            pokemon: name,
+            objsprites: sprite
+          }
+          Array[i] = offer;
+        },
+        () => {
+          this.pokemon = null;
+          console.log("Something is wrong I can feel it (pokemon retrieval).");
+        }
       )
     }
-      return Array;
-    
+    return Array;
+
+  }
+
+  open(offer: any) {
+    this.ts.setData(offer);
+    this.router.navigate(['signleoffer']);
   }
 
 }

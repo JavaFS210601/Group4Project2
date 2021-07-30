@@ -8,36 +8,42 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  usern:string = "";
-  userp:string ="";
-  
+  usern: string = "";
+  userp: string = "";
 
-  constructor(public router:Router) { }
+
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }
 
-   async submit() {
+  async submit() {
 
-    let url;
+    let url="http://localhost:8080/MyP2/";
 
     let user = {
-        username: this.usern,
-        password: this.userp
+      username: this.usern,
+      password: this.userp
     }
 
-    let response = await fetch (url + "login",{
+    let response = await fetch(url + "login", {
 
-        method: "POST",
+      method: "POST",
 
-        body: JSON.stringify(user)
+      body: JSON.stringify(user)
+     
 
     });
-    
-      if(response.status === 200){
-        this.router.navigate(['home']);
-      }
-      
-    
+
+    if (response.status === 200) {
+      this.router.navigate(['home']);
+
+    }
+    else {
+      console.log(response.status);
+      console.log("failed");
+    }
+
+
   }
 }

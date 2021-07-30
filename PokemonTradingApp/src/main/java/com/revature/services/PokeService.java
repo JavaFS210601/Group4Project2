@@ -22,7 +22,7 @@ public class PokeService {
 		
 		Optional<PokeUsers> pkUser = null;
 		
-		pkUser =  Optional.ofNullable(userDao.getUserUsername(user.getPoke_username()));
+		pkUser =  Optional.ofNullable(userDao.getUserByUsername(user.getPoke_username()));
 				
 		if(pkUser.isPresent()) {
 			

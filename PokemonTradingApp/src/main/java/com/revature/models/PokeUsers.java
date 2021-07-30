@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+@Component
 @Entity
 @Table(name = "poke_users")
 public class PokeUsers {
@@ -35,6 +39,16 @@ public class PokeUsers {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public PokeUsers(String poke_username, String poke_password) {
+		
+		
+		super();
+		this.poke_username = poke_username;
+		this.poke_password = poke_password;
+		System.out.println("I am Mapping JSON to a user object!!!");
+	}
 
 
 	public PokeUsers(int poke_user_id, String poke_username, String poke_password, String poke_full_name,
@@ -45,6 +59,7 @@ public class PokeUsers {
 		this.poke_password = poke_password;
 		this.poke_full_name = poke_full_name;
 		this.poke_contact_info = poke_contact_info;
+		System.out.println("Calling the constructor!!!");
 	}
 
 
@@ -54,6 +69,7 @@ public class PokeUsers {
 		this.poke_password = poke_password;
 		this.poke_full_name = poke_full_name;
 		this.poke_contact_info = poke_contact_info;
+		System.out.println("Calling the constructor without the ID!!!");
 	}
 
 

@@ -12,7 +12,7 @@ public interface UserDAOInterface {
 	
 	public PokeUsers getUserById(int poke_user_id);
 	
-	public PokeUsers getUserUsername(String poke_username);
+	public PokeUsers getUserByUsername(String poke_username);
 	
 	public PokeUsers getUserPassword(String poke_password);
  }

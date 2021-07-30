@@ -11,3 +11,44 @@
 #body {
   background: rgba(107, 177, 177, 0.568);
 }
+
+button {
+  border: none;
+  background-color: #1877f2;
+  color: white;
+
+  width: 283px;
+  display: block;
+  border-radius: 5px;
+  padding: 10px 0px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#submit {
+  margin-left: 43vw;
+}
+
+input[type="text"] {
+  position: relative;
+
+  display: block;
+  background-color: #fff;
+  margin-top: 20px;
+  margin-left: 43vw;
+  border: 1.5px solid rgb(0, 0, 0);
+  width: 270px;
+  padding: 10px 40px;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+  font-family: "Segoe UI";
+  font-size: 15px;
+}
+
+#make-offer {
+  margin-top: 30px;
+  margin-left: 43vw;
+  width: 233px;
+  height: 45px;
+  display: block;
+}

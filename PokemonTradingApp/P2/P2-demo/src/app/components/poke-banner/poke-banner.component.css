@@ -3,6 +3,7 @@
   height: 67px;
   position: relative;
   left: 10px;
+  cursor: pointer;
 }
 
 .banner {
@@ -62,20 +63,28 @@ button {
 }
 
 #inventory {
-  margin-left: 37vw;
+  margin-left: 42vw;
 }
 
 #all-open {
-  margin-left: 20px;
+  margin-left: 28px;
 }
 #my-pending {
-  margin-left: 20px;
+  margin-left: 28px;
 }
 #my-past {
-  margin-left: 20px;
+  margin-left: 28px;
 }
 #my-open {
-  margin-left: 20px;
+  margin-left: 28px;
 }
 
 /* #42b72a */
+
+.logo:hover {
+  transform: scale(1.02, 1.02);
+}
+
+.navbar-button:hover {
+  transform: scale(1.02, 1.02);
+}

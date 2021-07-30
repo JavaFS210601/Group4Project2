@@ -36,11 +36,11 @@ public class LoginController {
 			
 			
 			//why u give me error?
-			user = ps.getPoke_username(user);
-			user = ps.getPoke_password(user);
+			String username = user.getPoke_username();
+			String password = user.getPoke_password();
 			
-			session.setAttribute("poke_username", user.getPoke_username());
-			session.setAttribute("poke_password", user.getPoke_password());
+			session.setAttribute("poke_username", username);
+			session.setAttribute("poke_password", password);
 			return ResponseEntity.status(200).build();			
 		}
 		

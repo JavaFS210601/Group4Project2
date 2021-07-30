@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.revature.models.PokeUsers;
 
-public interface PokeUsersDAO extends JpaRepository<PokeUsers, Integer>{
+public class PokeUsersDAO {
 	
-	public Optional<List<PokeUsers>> findByName(String name);
+	
 
 }

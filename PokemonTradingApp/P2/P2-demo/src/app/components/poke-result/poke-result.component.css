@@ -1,0 +1,16 @@
+#image{
+    width: 410px;
+    margin-top: 40px;
+    max-height: 340px;
+
+
+}
+
+#show-poke{
+    background: url(../../../assets/bg.jpg) ;
+    background-size: cover;
+    max-width: 26vw;
+    margin-left: 40vw;
+    margin-top: 30px;
+    height: 78vh;
+}

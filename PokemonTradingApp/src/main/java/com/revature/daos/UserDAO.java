@@ -38,6 +38,7 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public PokeUsers getUserById(int poke_user_id) {
+		
 		Session ses = HibernateUtil.getSession();
 		PokeUsers user = ses.get(PokeUsers.class, poke_user_id);
 		HibernateUtil.closeSession();
@@ -45,7 +46,9 @@ public class UserDAO implements UserDAOInterface {
 	}
 
 	@Override
-	public PokeUsers getUserUsername(String poke_username) {
+	public PokeUsers getUserByUsername(String poke_username) {
+		System.out.println("I am getting user for "+ poke_username);
+		
 		Session ses = HibernateUtil.getSession();
 		PokeUsers user = ses.get(PokeUsers.class, poke_username);
 		HibernateUtil.closeSession();
@@ -54,7 +57,9 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public PokeUsers getUserPassword(String poke_password) {
+		
 		Session ses = HibernateUtil.getSession();
+		System.out.println("I am getting password");
 		PokeUsers user = ses.get(PokeUsers.class, poke_password);
 		HibernateUtil.closeSession();
 		return user;

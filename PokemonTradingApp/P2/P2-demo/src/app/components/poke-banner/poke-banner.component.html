@@ -1,13 +1,18 @@
 <header>
     <div class="banner">
-        <img class="logo" src="../../../assets/logo.png" alt="">
-        <button class="navbar-button" routerLinkActive="active" routerLink="home/inventory" id='inventory'>My inventory</button>
-        <button class="navbar-button" routerLinkActive="active" routerLink="home/opentrades" id ='all-open'>All Open Trades</button>
-        <button class="navbar-button" routerLinkActive="active" routerLink="home/pendingtrades" id='my-pending'>My Pending Trades</button>
-        <button class="navbar-button" routerLinkActive="active" routerLink="home/myopentrades" id='my-open'>My Open Trades</button>
-        <button class="navbar-button" routerLinkActive="active" routerLink="home/pasttrades" id ='my-past'>My Past Trades</button>
+        <img class="logo" src="../../../assets/logo.png" alt="" (click)="goHome()">
+        <button (click)="go('inventory')" class="navbar-button" id='inventory'>My
+            inventory</button>
+        <button (click)="go('opentrades')" class="navbar-button" id='all-open'>All Open
+            Trades</button>
+        <button (click)="go('pendingtrades')" class="navbar-button" id='my-pending'>My
+            Pending Trades</button>
+        <button (click)="go('myopentrades')" class="navbar-button" id='my-open'>My Open
+            Trades</button>
+        <button (click)="go('pasttrades')" class="navbar-button" id='my-past'>My Past
+            Trades</button>
     </div>
     <div>
-        
+
     </div>
 </header>

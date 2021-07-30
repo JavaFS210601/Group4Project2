@@ -1,0 +1,36 @@
+<app-poke-banner></app-poke-banner>
+
+<div id="grid-container" *ngIf="offer!=null">
+    <div class="offer-card">
+        <img src={{offer.objsprites}}>
+        <p>Offer ID: {{offer.id}}</p>
+        <p>Offer Made by: {{offer.user}}</p>
+        <p>Pokemon Offered: {{offer.user}}</p>
+
+    </div>
+    <br>
+    <button (click)="makeOffer()" id="make-offer" [hidden]="hiddenValue">Make an offer</button>
+
+    <br>
+    <div [hidden]="hiddenValue2">
+        <h5 id="username-label">Enter Your Username:</h5>
+        <input type="text" id="username" placeholder="Username" [(ngModel)]="username">
+        <br>
+        <br>
+        <h5 id="poke-label">Choose The Pokemon You want to offer:</h5>
+        <select id="pokeChoose" [(ngModel)]="selectedValue">
+            <option *ngFor="let pokemon of inventory" [value]="pokemon.value">{{pokemon.name}}</option>
+
+        </select>
+
+        <button (click)="submitOffer()" class="button" id="submit-offer">Submit Offer</button>
+    </div>
+
+
+</div>
+
+<div *ngIf="offer==null">
+
+    <button class="button" routerLinkActive="active" routerLink="home/opentrades" class="back-button">Open All
+        Trades</button>
+</div>
