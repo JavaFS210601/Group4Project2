@@ -11,4 +11,8 @@ public interface UserDAOInterface {
 	public List<PokeUsers> getAllUsers();
 	
 	public PokeUsers getUserById(int poke_user_id);
+	
+	public PokeUsers getUserUsername(String poke_username);
+	
+	public PokeUsers getUserPassword(String poke_password);
  }

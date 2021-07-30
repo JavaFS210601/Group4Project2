@@ -44,4 +44,20 @@ public class UserDAO implements UserDAOInterface {
 		return user;
 	}
 
+	@Override
+	public PokeUsers getUserUsername(String poke_username) {
+		Session ses = HibernateUtil.getSession();
+		PokeUsers user = ses.get(PokeUsers.class, poke_username);
+		HibernateUtil.closeSession();
+		return user;
+	}
+
+	@Override
+	public PokeUsers getUserPassword(String poke_password) {
+		Session ses = HibernateUtil.getSession();
+		PokeUsers user = ses.get(PokeUsers.class, poke_password);
+		HibernateUtil.closeSession();
+		return user;
+	}
+
 }
