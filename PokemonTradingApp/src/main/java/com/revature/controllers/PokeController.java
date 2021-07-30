@@ -30,8 +30,6 @@ public class PokeController {
 //		return Arrays.asList(pokeuser.getAllUsers()); 
 //	}
 	
-//	@PostMapping("/login")
-//	public ResponseEntity
 	
 	
 

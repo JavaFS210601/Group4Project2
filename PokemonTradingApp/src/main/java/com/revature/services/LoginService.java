@@ -1,58 +1,44 @@
 package com.revature.services;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
-import com.revature.daos.LoginDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.revature.daos.UserDAO;
 import com.revature.models.PokeUsers;
 
+@Service
+@SessionAttributes("Session")
 public class LoginService {
 
+	private UserDAO userDao;
 	
+	@Autowired
+	public LoginService(UserDAO userDao) {
+		super();
+		this.userDao = userDao;
+	}
 	
-	private LoginDAO lDAO = new LoginDAO();
-	
-	UserDAO userDao = new UserDAO();
-	
-	public int login(String username, String password) {
+	public boolean login(PokeUsers user) { 
 		
+		boolean validated = false;
 		
-		 
+		Optional<PokeUsers> pkUser = Optional.ofNullable(userDao.getUserUsername(user.getPoke_username()));
 		
-		UserDAO allUsers = new UserDAO();
-		List<PokeUsers> checkLogin = allUsers.getAllUsers();
-		
-		for(PokeUsers test : checkLogin) {
+		if(pkUser.isPresent()) {
 			
-			if(username.equals(test.getPoke_username()) && password.equals(test.getPoke_password())) {
+			PokeUsers pUser = pkUser.get();
+			
+			if(user.getPoke_password().compareTo(pUser.getPoke_password()) == 0) {
 				
-				return test.getPoke_user_id();
+				validated = true;
 			}
-			
-			
 		}
-		
-		return -1;
+		return validated;
 	}
 	
-	public boolean login2(String username, String password) {
-		
-		//get credentials from DAO
-		List<PokeUsers> userList = new ArrayList<>();
-		
-		
-		
-		userList = userDao.getAllUsers();
-		
-		for(int i = 0; i < userList.size(); i++) {
-			if(username.equals(userList.get(i).getPoke_username()) && password.equals(userList.get(i).getPoke_password())) {
-				return true;
-			}
-			
-			
-		}
-		return false;
-	}
-
+	
+	
 }

@@ -3,10 +3,12 @@ package com.revature.daos;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import com.revature.models.PokeUsers;
 import com.revature.utils.HibernateUtil;
 
+@Repository
 public class UserDAO implements UserDAOInterface {
 	
 	@Override
@@ -38,6 +40,22 @@ public class UserDAO implements UserDAOInterface {
 	public PokeUsers getUserById(int poke_user_id) {
 		Session ses = HibernateUtil.getSession();
 		PokeUsers user = ses.get(PokeUsers.class, poke_user_id);
+		HibernateUtil.closeSession();
+		return user;
+	}
+
+	@Override
+	public PokeUsers getUserUsername(String poke_username) {
+		Session ses = HibernateUtil.getSession();
+		PokeUsers user = ses.get(PokeUsers.class, poke_username);
+		HibernateUtil.closeSession();
+		return user;
+	}
+
+	@Override
+	public PokeUsers getUserPassword(String poke_password) {
+		Session ses = HibernateUtil.getSession();
+		PokeUsers user = ses.get(PokeUsers.class, poke_password);
 		HibernateUtil.closeSession();
 		return user;
 	}
