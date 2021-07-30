@@ -1,5 +1,31 @@
-<input class="col" type="number" [(ngModel)]="input" placeholder="Type a pokemon ID here" id='search-bar'/>
+<app-poke-banner></app-poke-banner>
+<carousel [isAnimated]="true">
+     <slide>
+          <img src="../../../assets/image1.jpg" alt="first slide"
+               style="display: block;  margin-left: 27vw; height: 60vh; width: 50vw; margin-top: 20px; box-shadow: 5px 5px 15px 5px #000000;">
 
-<button class="btn btn-primary" (click)="getPoke()">
+     </slide>
+     <slide>
+          <img src="../../../assets/image2.jpg" alt="second slide"
+               style="display: block;  margin-left: 27vw; height: 60vh; width: 50vw; margin-top: 20px;box-shadow: 5px 5px 15px 5px #000000;">
+     </slide>
+     <slide>
+          <img src="../../../assets/Pokemon-Wallpapers-HD.png" alt="third slide"
+               style="display: block;  margin-left: 27vw; height: 60vh; width: 50vw; margin-top: 20px;box-shadow: 5px 5px 15px 5px #000000;">
+
+     </slide>
+</carousel>
+
+<div style="text-align: center; ">
+
+     <h3 id="header">
+          Enter A Pokemon Id to search
+     </h3>
+
+</div>
+
+<input class="col" type="number" [(ngModel)]="input" placeholder="Type a pokemon ID here" id='search-bar' />
+
+<button class="btn btn-primary" id="search-poke" (click)="getPoke()">
      Click to get Pokemon
 </button>

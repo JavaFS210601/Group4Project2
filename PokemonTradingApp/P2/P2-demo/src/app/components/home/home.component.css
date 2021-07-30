@@ -5,10 +5,22 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #search-bar {
-  width: 200px;
+  width: 300px;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 50vw;
+  margin-left: 42vw;
   display: block;
   text-align: center;
+  height: 45px;
+}
+
+#search-poke {
+  margin-left: 44vw;
+  width: 233px;
+  height: 45px;
+  display: block;
+}
+
+#header {
+  margin-top: 30px;
 }

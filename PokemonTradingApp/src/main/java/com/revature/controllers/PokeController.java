@@ -1,15 +1,10 @@
 package com.revature.controllers;
 
-import java.util.Arrays;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.daos.UserDAO;
 import com.revature.models.PokeUsers;
 
 @RestController
@@ -19,6 +14,8 @@ public class PokeController {
 	
 	private PokeUsers pokeuser;
 
+	
+	@Autowired
 	public PokeController(PokeUsers pokeuser) {
 		super();
 		this.pokeuser = pokeuser;

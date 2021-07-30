@@ -8,9 +8,9 @@ describe('PendingTradesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PendingTradesComponent ]
+      declarations: [PendingTradesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

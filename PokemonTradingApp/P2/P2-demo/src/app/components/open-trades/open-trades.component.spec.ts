@@ -8,9 +8,9 @@ describe('OpenTradesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OpenTradesComponent ]
+      declarations: [OpenTradesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

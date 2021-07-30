@@ -1,7 +1,9 @@
-<div id="notshown2" style="text-align: center;" [hidden]="hiddenValue">
+<app-poke-banner></app-poke-banner>
+
+<div id="notshown2" style="text-align: center;" *ngIf="1>offerArray.length">
     <h2>No Pending Trades.</h2>
 </div>
-
+<h2 style="text-align: center;" id="Title">Past Trading Records</h2>
 <div style="text-align: center;">
 
     <table class="table table-dark" id="table">
@@ -23,5 +25,19 @@
             <td>{{offer.second}}</td>
             <td>{{offer.offeredPoke}}</td>
         </tbody>
-    </table> -->
+    </table>
+
+    <h5 id="username-label">Enter Offer ID:</h5>
+    <input type="text" id="offerId" placeholder="Offer ID" [(ngModel)]="offerId">
+    <br>
+
+    <p id="radio_para">Accept The offer?</p>
+
+    <input type="radio" id="approved" name="status" value="1" [checked]="decision === 1" (change)="onChange(1)">
+    <label for="approved" id="approved_l">Yes</label><br>
+
+    <input type="radio" id="denied" name="status" value="2" [checked]="decision === 2" (change)="onChange(2)">
+    <label for="denied" id="denied_l">No</label><br>
+
+    <button (click)="submit()" id="submit"> Submit </button>
 </div>

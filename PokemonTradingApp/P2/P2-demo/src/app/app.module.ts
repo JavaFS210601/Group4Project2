@@ -14,6 +14,9 @@ import { OpenTradesComponent } from './components/open-trades/open-trades.compon
 import { PendingTradesComponent } from './components/pending-trades/pending-trades.component';
 import { MyOpenTradesComponent } from './components/my-open-trades/my-open-trades.component';
 import { PastTradesComponent } from './components/past-trades/past-trades.component';
+import { SingleOfferComponent } from './components/single-offer/single-offer.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { PokeResultComponent } from './components/poke-result/poke-result.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +29,14 @@ import { PastTradesComponent } from './components/past-trades/past-trades.compon
     OpenTradesComponent,
     PendingTradesComponent,
     MyOpenTradesComponent,
-    PastTradesComponent
+    PastTradesComponent,
+    SingleOfferComponent,
+    PokeResultComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CarouselModule.forRoot(),
     FormsModule,
     HttpClientModule
   ],

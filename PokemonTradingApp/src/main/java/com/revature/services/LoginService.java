@@ -25,17 +25,24 @@ public class LoginService {
 		
 		boolean validated = false;
 		
-		Optional<PokeUsers> pkUser = Optional.ofNullable(userDao.getUserUsername(user.getPoke_username()));
+		String username = user.getPoke_username();
+		String password = user.getPoke_password();
 		
-		if(pkUser.isPresent()) {
-			
-			PokeUsers pUser = pkUser.get();
-			
-			if(user.getPoke_password().compareTo(pUser.getPoke_password()) == 0) {
-				
-				validated = true;
-			}
+		PokeUsers dataUser= userDao.getUserByUsername(username);
+		if(dataUser.getPoke_password().equals(password)) {
+			validated =true;
 		}
+//		Optional<PokeUsers> pkUser = Optional.ofNullable(userDao.getUserUsername(user.getPoke_username()));
+//		
+//		if(pkUser.isPresent()) {
+//			
+//			PokeUsers pUser = pkUser.get();
+//			
+//			if(user.getPoke_password().compareTo(pUser.getPoke_password()) == 0) {
+//				
+//				validated = true;
+//			}
+//		}
 		return validated;
 	}
 	

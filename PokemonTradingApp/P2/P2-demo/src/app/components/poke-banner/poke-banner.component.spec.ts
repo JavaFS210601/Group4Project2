@@ -8,9 +8,9 @@ describe('PokeBannerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PokeBannerComponent ]
+      declarations: [PokeBannerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

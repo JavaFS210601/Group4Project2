@@ -1,0 +1,16 @@
+<app-poke-banner></app-poke-banner>
+
+<div id="show-poke" style="text-align: center;">
+    <img id="image" src={{pokemon.sprites.front_shiny}} alt="">
+    <br>
+    <br>
+    <h4>Name: {{pokemon.name}}</h4>
+    <br>
+    <h4 style="display: inline;" style="font-weight: 400;">Types: <h5 *ngFor="let poketype of pokemon.types"
+            style="display: inline;">
+            {{poketype.type.name}} | </h5>
+    </h4>
+    <br>
+    <h4 style="font-weight: 400; display: inline;">Weight: <h5 style="display: inline;">{{pokemon.weight}} lbs</h5>
+    </h4>
+</div>
