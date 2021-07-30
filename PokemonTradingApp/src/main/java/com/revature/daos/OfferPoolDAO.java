@@ -41,7 +41,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		Session session = HibernateUtil.getSession();
 		
 		
-		List<OfferPool> myOffers =  session.createQuery("FROM offer_pool LEFT JOIN inventory_join ON user_id_fk = ?1 WHERE user_id_fk = ?1").setParameter(1,  user.getPoke_user_id()).list();
+		List<OfferPool> myOffers =  session.createQuery("FROM offer_pool INNER JOIN inventory_join ON offer_pool.primary_inventory_id = inventory_join.inventory_id WHERE user_id_fk = ?1").setParameter(1,  user.getPoke_user_id()).list();
 		HibernateUtil.closeSession();
 		
 		// TODO Auto-generated method stub
