@@ -11,5 +11,7 @@ public interface InventoryDAOInterface {
 	
 	public List<InventoryJoin> getInventoriesByUser(PokeUsers user);
 	
+	public InventoryJoin addPokemon(InventoryJoin newPokemon);
+	
 	
 }
