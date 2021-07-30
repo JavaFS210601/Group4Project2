@@ -1,0 +1,12 @@
+#table {
+  margin-left: 5vw;
+  margin-top: 30px;
+  max-width: 90vw;
+}
+#head1 {
+  background: rgba(60, 70, 70, 0.514);
+}
+
+#body {
+  background: rgba(107, 177, 177, 0.568);
+}

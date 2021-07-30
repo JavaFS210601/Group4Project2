@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
     this.ps.getPokemonFromApi(this.input).subscribe(
 
-      (data:Pokemon) => { console.log(data.name); }, 
+      (data:Pokemon) => { this.pokemon=data; }, 
       () => {
         this.pokemon = null;
         console.log("Something is wrong I can feel it (pokemon retrieval).");
