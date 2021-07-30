@@ -1,0 +1,28 @@
+<app-poke-banner></app-poke-banner>
+
+<div id="grid-container" *ngIf="trade!=null">
+    <div class="trade-card">
+        <img src={{trade.objsprites}}>
+        <p>Pokemon ID: {{trade.id}}</p>
+        <p style = "text-transform:capitalize;">Pokemon Trading: {{trade.pokemon}}</p>
+
+    </div>
+    <br>
+    <button (click)="makeTrade()" id="make-trade" [hidden]="hiddenValue">Make a trade</button>
+
+    <br>
+    <div [hidden]="hiddenValue2">
+        <br>
+        <br>
+
+        <button (click)="submitTrade()" class="button" id="submit-offer">Submit Trade</button>
+    </div>
+
+
+</div>
+
+<div *ngIf="trade==null">
+
+    <button class="button" routerLinkActive="active" routerLink="home/opentrades" class="back-button">Open All
+        Trades</button>
+</div>

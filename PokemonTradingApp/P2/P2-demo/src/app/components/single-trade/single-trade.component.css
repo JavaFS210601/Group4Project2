@@ -1,0 +1,87 @@
+#grid-container {
+    margin-top: 3em;
+    display: block;
+  }
+  .trade-card {
+    text-align: center;
+    margin-left: 42vw;
+    border-width: 0.1em;
+    border-style: solid;
+    border-radius: 0.5em;
+    width: 20em;
+    min-height: 10em;
+    background-color: rgba(209, 205, 200, 0.397);
+  }
+  
+  .back-button {
+    margin-top: 20vh;
+    width: 360px;
+    font-size: 14px;
+    background-color: #42b72a;
+    margin-left: 42vw;
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid #000000;
+    height: 70px;
+  }
+  
+  #make-trade {
+    margin-left: 43vw;
+    width: 283px;
+    height: 70px;
+    display: block;
+  }
+  
+  button {
+    border: none;
+    background-color: #1877f2;
+    color: white;
+  
+    width: 283px;
+    display: block;
+    border-radius: 5px;
+    padding: 10px 0px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  input[type="text"] {
+    position: relative;
+  
+    display: block;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-left: 44vw;
+    border: 1.5px solid rgb(0, 0, 0);
+    width: 270px;
+    padding: 10px 40px;
+    border-radius: 5px;
+    text-align: center;
+    color: black;
+    font-family: "Segoe UI";
+    font-size: 15px;
+  }
+  
+  #username-label {
+    margin-top: 20px;
+    margin-left: 46vw;
+  }
+  
+  #poke-label {
+    margin-top: 15px;
+    margin-left: 43vw;
+  }
+  
+  #pokeChoose {
+    font-family: "Ubuntu", sans-serif;
+    width: 20vw;
+    height: 30px;
+    border: 2px solid rgba(7, 7, 7, 0.582);
+    margin-top: 15px;
+    margin-left: 41vw;
+  }
+  
+  #submit-trade {
+    margin-top: 20px;
+    margin-left: 44vw;
+  }

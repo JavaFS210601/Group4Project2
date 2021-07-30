@@ -56,7 +56,7 @@ export class OpenTradesComponent implements OnInit {
 
   open(offer: any) {
     this.ts.setData(offer);
-    this.router.navigate(['signleoffer']);
+    this.router.navigate(['singleoffer']);
   }
 
 }
