@@ -2,8 +2,12 @@ package com.revature.controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.MediaType;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +17,9 @@ import com.revature.models.PokeUsers;
 import com.revature.services.LoginService;
 import com.revature.services.PokeService;
 
+@CrossOrigin
 @RestController
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/login", produces= "application/json" )
 public class LoginController {
 	
 	private LoginService ls;
@@ -29,10 +34,12 @@ public class LoginController {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	@PostMapping
+	@PostMapping (consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity login(@RequestBody PokeUsers user, HttpSession session) {
 		
 		if(ls.login(user)) {
+			
+			System.out.println("I am in the controller ");
 			
 			
 			//why u give me error?

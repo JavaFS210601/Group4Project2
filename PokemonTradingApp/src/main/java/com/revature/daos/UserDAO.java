@@ -1,6 +1,7 @@
 package com.revature.daos;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -48,11 +49,15 @@ public class UserDAO implements UserDAOInterface {
 	@Override
 	public PokeUsers getUserByUsername(String poke_username) {
 		System.out.println("I am getting user for "+ poke_username);
-		
 		Session ses = HibernateUtil.getSession();
-		PokeUsers user = ses.get(PokeUsers.class, poke_username);
+		List<PokeUsers> user = (List<PokeUsers>) ses.createQuery("FROM PokeUsers").list();
+		for(PokeUsers i: user) {
+			if(i.getPoke_username().equals(poke_username)) {
+				return i;
+			}
+		}
 		HibernateUtil.closeSession();
-		return user;
+		return null;
 	}
 
 	@Override
