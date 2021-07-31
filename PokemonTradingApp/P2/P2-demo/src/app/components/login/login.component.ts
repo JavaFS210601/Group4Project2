@@ -19,35 +19,35 @@ export class LoginComponent implements OnInit {
 
   async submit() {
 
-    let url="http://localhost:8080/MyP2/";
+    let url="http://localhost:8090/poketrade/";
 
     let user = {
-      username: this.usern,
-      password: this.userp
+      poke_username: this.usern,
+      poke_password: this.userp
     }
 
-    if (user.password == "password" && user.username == "username"){
+    //if (user.password == "password" && user.username == "username"){
+     // this.router.navigate(['home']);
+
+   // }
+
+    let response = await fetch(url + "login", {
+
+      method: "POST",
+
+      body: JSON.stringify(user)
+     
+
+    });
+
+    if (response.status === 200) {
       this.router.navigate(['home']);
 
     }
-
-    //let response = await fetch(url + "login", {
-
-      //method: "POST",
-
-      //body: JSON.stringify(user)
-     
-
-    //});
-
-    //if (response.status === 200) {
-    //  this.router.navigate(['home']);
-
-    //}
-    //else {
-    //  console.log(response.status);
-    //  console.log("failed");
-    //}
+    else {
+      console.log(response.status);
+       console.log("failed");
+    }
 
 
   }
