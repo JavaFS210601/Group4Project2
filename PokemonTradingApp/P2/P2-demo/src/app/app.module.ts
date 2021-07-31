@@ -17,6 +17,7 @@ import { PastTradesComponent } from './components/past-trades/past-trades.compon
 import { SingleOfferComponent } from './components/single-offer/single-offer.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PokeResultComponent } from './components/poke-result/poke-result.component';
+import { SingleTradeComponent } from './components/single-trade/single-trade.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PokeResultComponent } from './components/poke-result/poke-result.compon
     MyOpenTradesComponent,
     PastTradesComponent,
     SingleOfferComponent,
-    PokeResultComponent
+    PokeResultComponent,
+    SingleTradeComponent
   ],
   imports: [
     BrowserModule,

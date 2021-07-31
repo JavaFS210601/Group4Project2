@@ -10,6 +10,7 @@ import { PastTradesComponent } from './components/past-trades/past-trades.compon
 import { PendingTradesComponent } from './components/pending-trades/pending-trades.component';
 import { SingleOfferComponent } from './components/single-offer/single-offer.component';
 import { PokeResultComponent } from './components/poke-result/poke-result.component';
+import { SingleTradeComponent } from './components/single-trade/single-trade.component';
 
 const routes: Routes = [
   {
@@ -54,12 +55,16 @@ const routes: Routes = [
     component: PendingTradesComponent
   },
   {
-    path: 'signleoffer',
+    path: 'singleoffer',
     component: SingleOfferComponent
   },
   {
     path: 'pokeresult',
     component: PokeResultComponent
+  },
+  {
+    path: 'singletrade',
+    component: SingleTradeComponent
   }
 ];
 
