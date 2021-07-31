@@ -7,7 +7,7 @@ import com.revature.models.PokeUsers;
 
 public interface UserDAOInterface {
 
-	public void addUser(PokeUsers user);
+	public boolean addUser(PokeUsers user);
 	
 	public List<PokeUsers> getAllUsers();
 	
@@ -16,4 +16,6 @@ public interface UserDAOInterface {
 	public PokeUsers getUserByUsername(String poke_username);
 	
 	public PokeUsers getUserPassword(String poke_password);
+	
+	public PokeUsers getUserByContact(String poke_contact);
  }
