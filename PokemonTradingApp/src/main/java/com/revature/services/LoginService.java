@@ -28,6 +28,7 @@ public class LoginService {
 		String username = user.getPoke_username();
 		String password = user.getPoke_password();
 		
+		System.out.println("im here");
 		PokeUsers dataUser= userDao.getUserByUsername(username);
 		if(dataUser.getPoke_password().equals(password)) {
 			validated =true;

@@ -1,5 +1,6 @@
 package com.revature.daos;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -50,14 +51,16 @@ public class UserDAO implements UserDAOInterface {
 	public PokeUsers getUserByUsername(String poke_username) {
 		System.out.println("I am getting user for "+ poke_username);
 		Session ses = HibernateUtil.getSession();
-		List<PokeUsers> user = (List<PokeUsers>) ses.createQuery("FROM PokeUsers").list();
-		for(PokeUsers i: user) {
-			if(i.getPoke_username().equals(poke_username)) {
-				return i;
-			}
-		}
+		PokeUsers user = (PokeUsers) ses.createQuery("FROM PokeUsers WHERE poke_username = ?1").setParameter(1, poke_username).getSingleResult();
+//		for(int i = 0; i < user.size(); i++) {
+//			if(user.get(i).getPoke_username().equals(poke_username)) {
+//				System.out.println(i);
+//				return user.get(i);
+//			}
+//			
+//		}
 		HibernateUtil.closeSession();
-		return null;
+		return user;
 	}
 
 	@Override
