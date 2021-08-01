@@ -2,15 +2,14 @@ package com.revature.daos;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import com.revature.models.PokeUsers;
 import com.revature.utils.HibernateUtil;
 
-@Repository
+@Component
 public class UserDAO implements UserDAOInterface {
 	
 	@Override
@@ -66,7 +65,9 @@ public class UserDAO implements UserDAOInterface {
 
 	@Override
 	public PokeUsers getUserByUsername(String poke_username) {
+		
 		System.out.println("I am getting user for "+ poke_username);
+		
 		Session ses = HibernateUtil.getSession();
 		PokeUsers user = (PokeUsers) ses.createQuery("FROM PokeUsers WHERE poke_username = ?1" ).setParameter(1, poke_username).uniqueResult();
 //		PokeUsers user = (PokeUsers) ses.createQuery("FROM PokeUsers WHERE poke_username = ?1").setParameter(1, poke_username).getSingleResult();
@@ -78,7 +79,8 @@ public class UserDAO implements UserDAOInterface {
 //			
 //		}
 		HibernateUtil.closeSession();
-		return user;
+		System.out.println(user);
+		return user; 
 	}
 
 	@Override
