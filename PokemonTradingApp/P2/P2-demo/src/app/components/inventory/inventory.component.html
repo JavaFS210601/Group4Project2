@@ -9,4 +9,22 @@
         <p style = "text-transform:capitalize;">Pokemon Name: {{inventoryInfo.pokemon}}</p>
         <button (click)="open(inventoryInfo)" class="button">Trade</button>
     </div>
+
+    <!--<ng-template [ngIf]="newPokemon != null"> 
+        <div class="inventory-card">
+            <img src={{newPokemon.sprites}}>
+            <p>Inventory ID: {{newPokemon.id}}</p>
+            <p>Pokedex ID: {{newPokemon.pokedexId}}</p>
+            <p style = "text-transform:capitalize;">Pokemon Name: {{newPokemon.pokemon.name}}</p>
+            <button (click)="open(newPokemon)" class="button">Trade</button>
+        </div>
+    </ng-template> -->
+<!--
+    <div class="inventory-card">
+        <img src={{newPokemon.newInventory.id}}>
+        <p>Inventory ID: {{newPokemon.id}}</p>
+        <p>Pokedex ID: {{newPokemon.pokedexId}}</p>
+        <p style = "text-transform:capitalize;">Pokemon Name: {{newPokemon.pokemon.name}}</p>
+        <button (click)="open(newPokemon)" class="button">Trade</button>
+    </div> -->
 </div>

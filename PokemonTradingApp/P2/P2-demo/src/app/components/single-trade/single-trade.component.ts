@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokeFetchService } from 'src/app/services/poke-fetch.service';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-trade',
@@ -17,9 +18,11 @@ export class SingleTradeComponent implements OnInit {
   hiddenValue: boolean = false;
   hiddenValue2: boolean = true;
   trade: any = this.ts.getData();
+  
 
   constructor(private ps: PokeFetchService,
-    private ts: TransferServiceService) { }
+    private ts: TransferServiceService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -29,10 +32,38 @@ export class SingleTradeComponent implements OnInit {
     this.hiddenValue2 = false;
   }
 
-  submitTrade() {
-    console.log("hello your pokemon " + this.ts.getData().pokemon + " is on the trade block")
-    console.log(this.ts.getData());
-    //console.log(" is on the trade block.");
+  async submitTrade() {
+
+    let offer:any = this.ts.getData;
+    
+     let url="http://localhost:8090/poketrade/";
+     let trade = {
+      
+      inventory_id: offer.id,
+      poke_id: offer.pokedexId
+
+    }
+    let response = await fetch(url + "offer", {
+
+      method: "POST",
+      
+      body: JSON.stringify(trade)
+     
+
+    });
+
+  if (response.status === 200) {
+      console.log("Success")
+
+
+    }
+    else {
+      console.log(response.status);
+      console.log("failed");
+    }
+    this.router.navigate(['home/inventory']);
+
+    
   }
 
 }
