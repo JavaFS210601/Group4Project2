@@ -14,3 +14,10 @@
     margin-top: 30px;
     height: 78vh;
 }
+
+#add-poke {
+    margin-left: 44vw;
+    width: 233px;
+    height: 45px;
+    display: block;
+  }

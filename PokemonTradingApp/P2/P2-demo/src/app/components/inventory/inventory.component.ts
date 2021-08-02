@@ -13,11 +13,37 @@ import { TransferServiceService } from 'src/app/services/transfer-service.servic
 export class InventoryComponent implements OnInit {
 
   public pokemon:any = null;
-  // holder =this.get
+  newPokemon = this.ts.getData();
   inventoryArray = this.getArray();
+
+  //if(this.newPokemon){
+    // do whatever needed
+  //  let sprite = this.newPokemon.sprites.front_shiny;
+  //  let name = this.newPokemon.name;
+  //  let replaceInt = 1;
+
+  //  console.log(sprite);      
+                   
+  //  var newInventory={
+  //      id: this.newPokemon.id,
+  //      pokedexId: replaceInt,
+  //      pokemon: name,
+  //      objsprites: sprite
+        
+  //  }
+  //}
+  //else{
+  //  console.log("Something went wrong adding new Pokemon")
+  //  this.router.navigateByUrl('home/inventory');
+  //}
+
+  
   constructor(private ps: PokeFetchService,
     private ts: TransferServiceService,
-    private router: Router) { }
+    private router: Router) { 
+      
+      
+    }
 
   ngOnInit(): void {
   }
@@ -33,7 +59,9 @@ export class InventoryComponent implements OnInit {
      
       this.ps.getPokemonFromApi(i+1).subscribe(
 
-     (data:Pokemon) => { this.pokemon=data;
+     
+        (data:Pokemon) => { this.pokemon=data;
+                      console.log(this.pokemon)
                       sprite = this.pokemon.sprites.front_shiny;
                       name = this.pokemon.name;
 
