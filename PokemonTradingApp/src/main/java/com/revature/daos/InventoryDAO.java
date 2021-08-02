@@ -12,6 +12,20 @@ import com.revature.utils.HibernateUtil;
 @Repository
 public class InventoryDAO implements InventoryDAOInterface{
 
+	
+	@Override
+	public InventoryJoin getInventoryById(int inventory_id) {
+		
+		Session ses = HibernateUtil.getSession();
+		
+		InventoryJoin inventory = (InventoryJoin) ses.createQuery("FROM InventoryJoin WHERE inventory_id = ?1").setParameter(1,  inventory_id).uniqueResult();
+		
+		HibernateUtil.closeSession();
+		
+		return inventory;
+		
+	}
+	
 	@Override
 	public InventoryJoin getUserByInventoryId(int inventory_id) {
 		
@@ -30,7 +44,7 @@ public class InventoryDAO implements InventoryDAOInterface{
 	public List<InventoryJoin> getInventoriesByUser(PokeUsers user) {
 		Session ses = HibernateUtil.getSession();
 		int userID = user.getPoke_user_id();
-		List<InventoryJoin> myInventories = ses.createQuery("FROM inventory_join WHERE user_id_fk = ?1").setParameter(1,  userID).list();
+		List<InventoryJoin> myInventories = ses.createQuery("FROM InventoryJoin WHERE user_id_fk = ?1").setParameter(1,  userID).list();
 		
 		
 		HibernateUtil.closeSession();
