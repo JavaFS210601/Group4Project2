@@ -35,6 +35,7 @@
 	<mapping class="com.revature.models.OfferStatus"/>
 	<mapping class="com.revature.models.PokeStatus"/>
 	<mapping class="com.revature.models.PokeUsers"/>
+	<mapping class="com.revature.models.CurrentUser"/>
 	
 	</session-factory>
 

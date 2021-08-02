@@ -44,9 +44,9 @@ public class InventoryDAO implements InventoryDAOInterface{
 	public List<InventoryJoin> getInventoriesByUser(PokeUsers user) {
 		Session ses = HibernateUtil.getSession();
 		int userID = user.getPoke_user_id();
+		
 		List<InventoryJoin> myInventories = ses.createQuery("FROM InventoryJoin WHERE user_id_fk = ?1").setParameter(1,  userID).list();
-		
-		
+
 		HibernateUtil.closeSession();
 		
 		
