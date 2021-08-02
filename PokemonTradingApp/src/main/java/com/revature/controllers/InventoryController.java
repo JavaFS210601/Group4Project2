@@ -2,26 +2,28 @@ package com.revature.controllers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.daos.CurrentUserDAO;
 import com.revature.daos.UserDAO;
 import com.revature.dto.InventoryDTO;
+import com.revature.models.CurrentUser;
 import com.revature.models.InventoryJoin;
 import com.revature.models.PokeStatus;
 import com.revature.models.PokeUsers;
 import com.revature.services.InventoryService;
-import com.revature.services.PokeService;
 
 @CrossOrigin
 @RestController
@@ -35,9 +37,6 @@ public class InventoryController {
 	public InventoryController() {
 		super();
 	}
-	
-
-
 
 		@SuppressWarnings("rawtypes")
 		@PostMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
@@ -88,5 +87,26 @@ public class InventoryController {
 			}
 			return ResponseEntity.status(401).build();
 			
+		}
+		
+		@SuppressWarnings("rawtypes")
+		@GetMapping(consumes = MediaType.TEXT_PLAIN_VALUE)
+		public ResponseEntity getInventory(HttpServletRequest req, HttpServletResponse res) throws IOException{
+			
+			if(req.getMethod().equals("GET")) {
+				
+				InventoryService is = new InventoryService();
+				CurrentUserDAO currentUserDao = new CurrentUserDAO();
+				CurrentUser currentUser = currentUserDao.getCurrentUser();
+				
+				List<InventoryJoin> inventory = is.getInventory(currentUser);
+				
+				String json = om.writeValueAsString(inventory);
+//				res.getWriter().print(json);
+//				res.setStatus(200);
+				return ResponseEntity.status(200).body(json);
+			}
+			return ResponseEntity.status(401).build();
+
 		}
 }

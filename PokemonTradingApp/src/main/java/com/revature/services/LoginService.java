@@ -1,12 +1,12 @@
 package com.revature.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.revature.daos.CurrentUserDAO;
 import com.revature.daos.UserDAO;
+import com.revature.models.CurrentUser;
 import com.revature.models.PokeUsers;
 
 @Service
@@ -30,7 +30,16 @@ public class LoginService {
 		
 		System.out.println("im here");
 		PokeUsers dataUser= userDao.getUserByUsername(username);
+		
 		if(dataUser.getPoke_password().equals(password)) {
+			
+			CurrentUserDAO currentUserDao = new CurrentUserDAO();
+			currentUserDao.deleteCurrentUser();
+			
+			CurrentUser currentUser = new CurrentUser(dataUser.getPoke_username(), dataUser.getPoke_user_id());
+			
+			currentUserDao.addCurrentUser(currentUser);
+			
 			validated =true;
 		}
 //		Optional<PokeUsers> pkUser = Optional.ofNullable(userDao.getUserUsername(user.getPoke_username()));
