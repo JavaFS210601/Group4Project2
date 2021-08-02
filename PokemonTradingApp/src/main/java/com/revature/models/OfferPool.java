@@ -31,7 +31,7 @@ public class OfferPool {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "offer_status_id") //specify which author column to create a relationship on
-	private OfferPool offer_status_id;
+	private OfferStatus offer_status_id;
 
 	
 	//Boiler Plate Code --------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ public class OfferPool {
 
 
 	public OfferPool(int offer_pool_id, InventoryJoin primary_inventory_id, InventoryJoin reply_inventory_id,
-			OfferPool offer_status_id) {
+			OfferStatus offer_status_id) {
 		super();
 		this.offer_pool_id = offer_pool_id;
 		this.primary_inventory_id = primary_inventory_id;
@@ -52,7 +52,8 @@ public class OfferPool {
 	}
 
 
-	public OfferPool(InventoryJoin primary_inventory_id, InventoryJoin reply_inventory_id, OfferPool offer_status_id) {
+	public OfferPool(InventoryJoin primary_inventory_id, InventoryJoin reply_inventory_id,
+			OfferStatus offer_status_id) {
 		super();
 		this.primary_inventory_id = primary_inventory_id;
 		this.reply_inventory_id = reply_inventory_id;
@@ -139,14 +140,15 @@ public class OfferPool {
 	}
 
 
-	public OfferPool getOffer_status_id() {
+	public OfferStatus getOffer_status_id() {
 		return offer_status_id;
 	}
 
 
-	public void setOffer_status_id(OfferPool offer_status_id) {
+	public void setOffer_status_id(OfferStatus offer_status_id) {
 		this.offer_status_id = offer_status_id;
 	}
+
 
 	
 }
