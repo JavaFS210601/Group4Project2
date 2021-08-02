@@ -70,3 +70,4 @@ export class PokeResultComponent implements OnInit {
 
 
 }
+}

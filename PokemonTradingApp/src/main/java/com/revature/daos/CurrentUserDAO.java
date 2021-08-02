@@ -13,6 +13,8 @@ public class CurrentUserDAO implements CurrentUserDAOInterface{
 	@Override
 	public void addCurrentUser(CurrentUser user) {
 		
+		System.out.println("the current user is: " + user);
+		
 		Session session = HibernateUtil.getSession();
 		
 		session.save(user);
@@ -24,9 +26,13 @@ public class CurrentUserDAO implements CurrentUserDAOInterface{
 	@Override
 	public CurrentUser getCurrentUser() {
 		
+		System.out.println("in current user method");
+		
 		Session session = HibernateUtil.getSession();
 		
 		CurrentUser userList = (CurrentUser) session.createQuery("FROM CurrentUser").uniqueResult();
+		
+		System.out.println("the user list is" + userList);
 		
 		HibernateUtil.closeSession();
 		
@@ -35,6 +41,8 @@ public class CurrentUserDAO implements CurrentUserDAOInterface{
 
 	@Override
 	public void deleteCurrentUser() {
+		
+		System.out.println("in delete user method");
 
 		Session session = HibernateUtil.getSession();
 		

@@ -15,6 +15,7 @@ export class InventoryComponent implements OnInit {
   public pokemon:any = null;
   newPokemon = this.ts.getData();
   inventoryArray = this.getArray();
+  userdata:any= null;
 
   //if(this.newPokemon){
     // do whatever needed
@@ -22,14 +23,14 @@ export class InventoryComponent implements OnInit {
   //  let name = this.newPokemon.name;
   //  let replaceInt = 1;
 
-  //  console.log(sprite);      
-                   
+  //  console.log(sprite);
+
   //  var newInventory={
   //      id: this.newPokemon.id,
   //      pokedexId: replaceInt,
   //      pokemon: name,
   //      objsprites: sprite
-        
+
   //  }
   //}
   //else{
@@ -37,29 +38,28 @@ export class InventoryComponent implements OnInit {
   //  this.router.navigateByUrl('home/inventory');
   //}
 
-  
+
   constructor(private ps: PokeFetchService,
     private ts: TransferServiceService,
     private router: Router) { 
-      
-      
+
+
     }
 
   ngOnInit(): void {
   }
 
-  getArray():any[] {
+   getArray():any[] {
     let Array:any = [];
    let sprite = "";
    let name = "";
    let replaceInt = 0;
-    
-   //for loop to bring in the pokemon that have an id of 1-6
-   for(let i=0;i<=6;i=i+1){
-     
-      this.ps.getPokemonFromApi(i+1).subscribe(
+   this.getUserData();
+   for(let i=0;i<=this.userdata.length;i++){
 
-     
+      this.ps.getPokemonFromApi(this.userdata[i].poke_id_fk).subscribe(
+
+
         (data:Pokemon) => { this.pokemon=data;
                       console.log(this.pokemon)
                       sprite = this.pokemon.sprites.front_shiny;
@@ -67,14 +67,14 @@ export class InventoryComponent implements OnInit {
 
 
                       console.log(sprite);
-                         
-                       
+
+
                       var inventoryInfo={
-                          id: i+1,
-                          pokedexId: i+1,
+                          id: this.userdata[i].inventory_id,
+                          pokedexId: this.userdata.poke_id_fk,
                           pokemon: name,
                           objsprites: sprite
-                          
+
                       }
                       Array[i]=inventoryInfo;
 
@@ -87,12 +87,20 @@ export class InventoryComponent implements OnInit {
    }
      console.log(Array);
      return Array;
-   
+
  }
 
  open(inventoryInfo: any) {
   this.ts.setData(inventoryInfo);
   this.router.navigate(['singletrade']);
+}
+
+async getUserData(){
+  let url="http://localhost:8090/poketrade/";
+   var response = await fetch(url+'inventory');
+   console.log(response)
+   this.userdata= await response.json();
+   
 }
 
 }

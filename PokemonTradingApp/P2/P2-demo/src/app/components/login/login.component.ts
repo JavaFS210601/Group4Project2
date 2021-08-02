@@ -19,41 +19,41 @@ export class LoginComponent implements OnInit {
 
   async submit() {
 
-    //let url="http://localhost:8090/poketrade/";
+    let url="http://localhost:8090/poketrade/";
 
-    //let user = {
-    //  poke_username: this.usern,
-    //  poke_password: this.userp
-    //}
-
-    //this was commented out
-    //if (user.password == "password" && user.username == "username"){
-    //  this.router.navigate(['home']);
-    //}
-
-    //josiah login work around
-    if(this.usern==='username' && this.userp==='password'){
-      console.log("success!");
-      this.router.navigate(['home']);
+    let user = {
+     poke_username: this.usern,
+     poke_password: this.userp
     }
 
-    //let response = await fetch(url + "login", {
+  
+    // if (user.password == "password" && user.username == "username"){
+    //  this.router.navigate(['home']);
+    // }
 
-    //  method: "POST",
+    //josiah login work around
+    // if(this.usern==='username' && this.userp==='password'){
+    //   console.log("success!");
+    //   this.router.navigate(['home']);
+    // }
 
-    //  body: JSON.stringify(user)
+    let response = await fetch(url + "login", {
+
+      method: "POST",
+
+     body: JSON.stringify(user)
      
 
-    //});
+    });
 
-    //if (response.status === 200) {
-    //  this.router.navigate(['home']);
+    if (response.status === 200) {
+      this.router.navigate(['home']);
 
-    //}
-    //else {
-    //  console.log(response.status);
-    //   console.log("failed");
-    //}
+    }
+    else {
+      console.log(response.status);
+       console.log("failed");
+    }
 
 
   }

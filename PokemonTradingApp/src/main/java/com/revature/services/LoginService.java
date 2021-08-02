@@ -34,14 +34,17 @@ public class LoginService {
 		if(dataUser.getPoke_password().equals(password)) {
 			
 			CurrentUserDAO currentUserDao = new CurrentUserDAO();
-			currentUserDao.deleteCurrentUser();
-			
-			CurrentUser currentUser = new CurrentUser(dataUser.getPoke_username(), dataUser.getPoke_user_id());
-			
-			currentUserDao.addCurrentUser(currentUser);
+//			currentUserDao.deleteCurrentUser();
+//			
+//			CurrentUser currentUser = new CurrentUser(dataUser.getPoke_username(), dataUser.getPoke_user_id());
+//			
+//			currentUserDao.addCurrentUser(currentUser);
 			
 			validated =true;
 		}
+		
+		
+		
 //		Optional<PokeUsers> pkUser = Optional.ofNullable(userDao.getUserUsername(user.getPoke_username()));
 //		
 //		if(pkUser.isPresent()) {

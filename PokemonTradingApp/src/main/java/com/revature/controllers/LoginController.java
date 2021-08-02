@@ -87,7 +87,7 @@ public class LoginController {
 		
 		if(ls.login(user)) {
 			
-			System.out.println("I am in the controller ");
+			System.out.println("I am in the login controller ");
 			
 			
 			

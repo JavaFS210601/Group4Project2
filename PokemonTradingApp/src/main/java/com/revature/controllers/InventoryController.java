@@ -90,23 +90,30 @@ public class InventoryController {
 		}
 		
 		@SuppressWarnings("rawtypes")
-		@GetMapping(consumes = MediaType.TEXT_PLAIN_VALUE)
-		public ResponseEntity getInventory(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		@GetMapping
+		public void getInventory(HttpServletRequest req, HttpServletResponse res) throws IOException{
 			
 			if(req.getMethod().equals("GET")) {
 				
+				System.out.println("im fetching inventory");
 				InventoryService is = new InventoryService();
 				CurrentUserDAO currentUserDao = new CurrentUserDAO();
-				CurrentUser currentUser = currentUserDao.getCurrentUser();
 				
-				List<InventoryJoin> inventory = is.getInventory(currentUser);
+//				CurrentUser currentUser = currentUserDao.getCurrentUser();
+				
+				List<InventoryJoin> inventory = is.getInventory(null);
+				
+				if(inventory != null) {
+					System.out.println("getting data from database");
+				}
 				
 				String json = om.writeValueAsString(inventory);
-//				res.getWriter().print(json);
-//				res.setStatus(200);
-				return ResponseEntity.status(200).body(json);
+				res.getWriter().print(json);
+				res.setStatus(200);
+				
+//				return ResponseEntity.status(200).body(inventory);
 			}
-			return ResponseEntity.status(401).build();
+//			return ResponseEntity.status(401).build();
 
 		}
 }
