@@ -52,7 +52,7 @@ export class InventoryComponent implements OnInit {
     let Array:any = [];
    let sprite = "";
    let name = "";
-   let replaceInt = 1;
+   let replaceInt = 0;
     
    //for loop to bring in the pokemon that have an id of 1-6
    for(let i=0;i<=6;i=i+1){
@@ -71,7 +71,7 @@ export class InventoryComponent implements OnInit {
                        
                       var inventoryInfo={
                           id: i+1,
-                          pokedexId: replaceInt,
+                          pokedexId: i+1,
                           pokemon: name,
                           objsprites: sprite
                           

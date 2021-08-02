@@ -32,10 +32,38 @@ export class SingleTradeComponent implements OnInit {
     this.hiddenValue2 = false;
   }
 
-  submitTrade() {
-    console.log("hello" + this.ts.getData().username + " your pokemon " + this.ts.getData().pokemon + " is on the trade block")
-    console.log(this.ts.getData());
-    this.router.navigate(['home/opentrades']);
-  }
+  async submitTrade() {
+
+    let offer:any = this.ts.getData;
+    
+     let url="http://localhost:8090/poketrade/";
+     let trade = {
+      
+      inventory_id: offer.id,
+      poke_id: offer.pokedexId
+
+    }
+    let response = await fetch(url + "offer", {
+
+      method: "POST",
+      
+      body: JSON.stringify(trade)
+     
+
+    });
+
+  if (response.status === 200) {
+      console.log("Success")
+
+
+    }
+    else {
+      console.log(response.status);
+      console.log("failed");
+    }
+    this.router.navigate(['home/inventory']);
+
+    
+
 
 }
