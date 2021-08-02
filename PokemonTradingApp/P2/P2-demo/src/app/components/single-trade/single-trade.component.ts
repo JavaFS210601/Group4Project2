@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PokeFetchService } from 'src/app/services/poke-fetch.service';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-trade',
@@ -17,9 +18,11 @@ export class SingleTradeComponent implements OnInit {
   hiddenValue: boolean = false;
   hiddenValue2: boolean = true;
   trade: any = this.ts.getData();
+  
 
   constructor(private ps: PokeFetchService,
-    private ts: TransferServiceService) { }
+    private ts: TransferServiceService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -30,9 +33,9 @@ export class SingleTradeComponent implements OnInit {
   }
 
   submitTrade() {
-    console.log("hello your pokemon " + this.ts.getData().pokemon + " is on the trade block")
+    console.log("hello" + this.ts.getData().username + " your pokemon " + this.ts.getData().pokemon + " is on the trade block")
     console.log(this.ts.getData());
-    //console.log(" is on the trade block.");
+    this.router.navigate(['home/opentrades']);
   }
 
 }

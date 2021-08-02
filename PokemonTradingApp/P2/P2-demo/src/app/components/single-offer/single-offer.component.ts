@@ -3,6 +3,7 @@ import { Pokemon } from 'src/app/models/pokemon';
 import { PokeFetchService } from 'src/app/services/poke-fetch.service';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
 
+
 @Component({
   selector: 'app-single-offer',
   templateUrl: './single-offer.component.html',
@@ -18,6 +19,7 @@ export class SingleOfferComponent implements OnInit {
   hiddenValue2: boolean = true;
   offer: any = this.ts.getData();
 
+  
   constructor(private ps: PokeFetchService,
     private ts: TransferServiceService) {
 
