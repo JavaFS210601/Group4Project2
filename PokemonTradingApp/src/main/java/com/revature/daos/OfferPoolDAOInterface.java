@@ -24,5 +24,7 @@ public interface OfferPoolDAOInterface {
 	
 	public void cancelOffer(OfferPool deleteThis);
 	
+	public void updateOffer(OfferPool offer_pool_id);
+	
 
 }

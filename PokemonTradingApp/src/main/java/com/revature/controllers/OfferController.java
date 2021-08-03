@@ -1,7 +1,9 @@
 package com.revature.controllers;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +37,36 @@ public class OfferController {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	@SuppressWarnings("rawtypes")
+	@GetMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity getOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+		if(req.getMethod().equals("GET")) {
+			
+			System.out.println("im fetching inventory");
+			
+			OfferService os = new OfferService();
 
+//			CurrentUser currentUser = currentUserDao.getCurrentUser();
+			
+			List<OfferPool> offer = os.getOffer();
+			
+//			if(inventory != null) {
+//				System.out.println("getting data from database");
+//			}
+			
+//			String json = om.writeValueAsString(inventory);
+//			res.getWriter().print(json);
+//			res.setStatus(200);
+			
+			return ResponseEntity.status(200).body(offer);
+		}
+		return ResponseEntity.status(401).build();
+		
+		
+	}
 
 	@SuppressWarnings("rawtypes")
 	@PostMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
@@ -83,5 +115,16 @@ public class OfferController {
 		return ResponseEntity.status(401).build();
 		
 	}
+	
+//	@SuppressWarnings("rawtypes")
+//	@PostMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
+//	public ResponseEntity updateOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+//		
+//		if(req.getMethod().equals("POST")) {
+//			
+//		}
+//		return null;
+//		
+//	}
 
 }

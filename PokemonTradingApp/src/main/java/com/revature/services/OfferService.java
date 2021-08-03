@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.revature.daos.OfferPoolDAO;
@@ -17,6 +19,15 @@ public class OfferService {
 		}
 		
 		return false;
+	}
+
+	public List<OfferPool> getOffer() {
+
+		OfferPoolDAO offerDao = new OfferPoolDAO();
+		
+		offerDao.getAllOffers();
+
+		return null;
 	}
 
 }
