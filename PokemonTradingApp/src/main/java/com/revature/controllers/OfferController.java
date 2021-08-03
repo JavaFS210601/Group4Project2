@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.daos.InventoryDAO;
 import com.revature.daos.UserDAO;
 import com.revature.dto.OfferDTO;
+import com.revature.dto.ReplyOfferDTO;
 import com.revature.models.InventoryJoin;
 import com.revature.models.OfferPool;
 import com.revature.models.OfferStatus;
@@ -119,7 +120,7 @@ public class OfferController {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	@PostMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
+	@PostMapping (value = "/replyoffer", consumes = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity updateOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		
 	if(req.getMethod().equals("POST")) {
@@ -139,9 +140,19 @@ public class OfferController {
 				
 			}
 			
+			String body = new String(sb);
+			
+			ReplyOfferDTO replyOffer = om.readValue(body, ReplyOfferDTO.class);
+			
+			if(os.replyOffer(replyOffer)) {
+				
+				return ResponseEntity.status(200).build();	
+			}
+					
+			
 		
 	}
-	return null;
+	return ResponseEntity.status(401).build();
 	
 
 	}
