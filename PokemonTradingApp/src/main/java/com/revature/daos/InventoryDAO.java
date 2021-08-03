@@ -2,10 +2,12 @@ package com.revature.daos;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.InventoryJoin;
+import com.revature.models.OfferPool;
 import com.revature.models.PokeUsers;
 import com.revature.utils.HibernateUtil;
 
@@ -63,6 +65,30 @@ public class InventoryDAO implements InventoryDAOInterface{
 		HibernateUtil.closeSession();
 
 		return null;
+	}
+	
+//	@Override
+//	public void updatePrimaryInventory(InventoryJoin offer_status_id) {
+//		
+//		Session session = HibernateUtil.getSession();
+//		
+//		session.merge(offer_status_id);
+//		
+//		HibernateUtil.closeSession();
+//
+//	}
+	
+	@Override
+	public void updateReplyInventory(InventoryJoin offer, OfferPool updateThis) {
+		
+		Session session = HibernateUtil.getSession();
+		
+		Query q = session.createQuery("UPDATE OfferPool SET reply_inventory_id = offer WHERE offer_id = ?1").setParameter(1, updateThis.getOffer_pool_id());
+		
+		q.executeUpdate();
+		
+		HibernateUtil.closeSession();
+
 	}
 	
 	

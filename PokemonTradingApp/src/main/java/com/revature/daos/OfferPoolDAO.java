@@ -19,7 +19,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		
 		Session session = HibernateUtil.getSession();
 		
-		List<OfferPool> currentOffers =  session.createQuery("FROM offer_pool").list();
+		List<OfferPool> currentOffers =  session.createQuery("FROM OfferPool").list();
 		HibernateUtil.closeSession();
 		// TODO Auto-generated method stub
 		return currentOffers;
@@ -30,7 +30,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		
 		Session session = HibernateUtil.getSession();
 		
-		OfferPool specificOffer = (OfferPool) session.createQuery("FROM offer_pool WHERE offer_id = ?1").setParameter(1,  findID).getSingleResult();
+		OfferPool specificOffer = (OfferPool) session.createQuery("FROM OfferPool WHERE offer_id = ?1").setParameter(1,  findID).getSingleResult();
 		HibernateUtil.closeSession();
 		// TODO Auto-generated method stub
 		return specificOffer;
@@ -41,7 +41,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		Session session = HibernateUtil.getSession();
 		
 		
-		List<OfferPool> myOffers =  session.createQuery("FROM offer_pool INNER JOIN inventory_join ON offer_pool.primary_inventory_id = inventory_join.inventory_id WHERE user_id_fk = ?1").setParameter(1,  user.getPoke_user_id()).list();
+		List<OfferPool> myOffers =  session.createQuery("FROM OfferPool INNER JOIN inventory_join ON offer_pool.primary_inventory_id = inventory_join.inventory_id WHERE user_id_fk = ?1").setParameter(1,  user.getPoke_user_id()).list();
 		HibernateUtil.closeSession();
 		
 		// TODO Auto-generated method stub
@@ -53,7 +53,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		Session session = HibernateUtil.getSession();
 		//offer.setStatus_status_id(newStatus);
 	
-		Query q = session.createQuery("UPDATE offer_pool SET offer_status_id = ?1 WHERE offer_pool_id = ?2").setParameter(1,  newStatus).setParameter(2, offer.getOffer_pool_id());
+		Query q = session.createQuery("UPDATE OfferPool SET offer_status_id = ?1 WHERE offer_pool_id = ?2").setParameter(1,  newStatus).setParameter(2, offer.getOffer_pool_id());
 		
 		HibernateUtil.closeSession();
 		
@@ -90,7 +90,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		
 		Session session = HibernateUtil.getSession();
 		
-		List<OfferPool> myOffers =  session.createQuery("FROM offer_pool WHERE offer_status_id = ?1").setParameter(1,  offerStatus).list();
+		List<OfferPool> myOffers =  session.createQuery("FROM OfferPool WHERE offer_status_id = ?1").setParameter(1,  offerStatus).list();
 		HibernateUtil.closeSession();
 		
 		// TODO Auto-generated method stub
@@ -104,7 +104,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		int deleteID = deleteThis.getOffer_pool_id();
 
 		Session session = HibernateUtil.getSession();
-		Query q = session.createQuery("DELETE from offer_pool WHERE offer_pool_id = ?1").setParameter(1,  deleteID);
+		Query q = session.createQuery("DELETE from OfferPool WHERE offer_pool_id = ?1").setParameter(1,  deleteID);
 		
 		
 		HibernateUtil.closeSession();
@@ -113,11 +113,42 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 	}
 	
 	@Override
-	public void updateOffer(OfferPool offer_status_id) {
+	//OPEN
+	public void updateOffer(OfferPool offer) {
 		
 		Session session = HibernateUtil.getSession();
 		
-		session.merge(offer_status_id);
+		Query q = session.createQuery("UPDATE OfferPool SET offer_status_id = ?1 WHERE offer_id = ?2").setParameter(1, 1).setParameter(2, offer.getOffer_pool_id());
+		
+		q.executeUpdate();
+		
+		HibernateUtil.closeSession();
+
+	}
+	
+	@Override
+	//PENDING
+	public void updateOfferPending(OfferPool offerP) {
+		
+		Session session = HibernateUtil.getSession();
+		
+		Query q = session.createQuery("UPDATE OfferPool SET offer_status_id = ?1 WHERE offer_id = ?2").setParameter(1, 2).setParameter(2, offerP.getOffer_pool_id());
+		
+		q.executeUpdate();
+		
+		HibernateUtil.closeSession();
+
+	}
+	
+	@Override
+	//COMPLETE
+	public void updateOfferComplete(OfferPool offerC) {
+		
+		Session session = HibernateUtil.getSession();
+		
+		Query q = session.createQuery("UPDATE OfferPool SET offer_status_id = ?1 WHERE offer_id = ?2").setParameter(1, 3).setParameter(2, offerC.getOffer_pool_id());
+		
+		q.executeUpdate();
 		
 		HibernateUtil.closeSession();
 

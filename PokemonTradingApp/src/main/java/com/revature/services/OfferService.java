@@ -25,9 +25,9 @@ public class OfferService {
 
 		OfferPoolDAO offerDao = new OfferPoolDAO();
 		
-		offerDao.getAllOffers();
+		List<OfferPool> offer = offerDao.getAllOffers();
 
-		return null;
+		return offer;
 	}
 
 }
