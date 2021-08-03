@@ -12,7 +12,7 @@ public class LoginDAO implements LoginDAOInterface{
 		
 		Session session = HibernateUtil.getSession();
 		
-		PokeUsers user = (PokeUsers) session.createQuery("FROM poke_users WHERE poke_username = ?1 AND poke_password = ?2").setParameter(1,  poke_username).setParameter(2,  poke_password).getSingleResult();
+		PokeUsers user = (PokeUsers) session.createQuery("FROM PokeUsers WHERE poke_username = ?1 AND poke_password = ?2").setParameter(1,  poke_username).setParameter(2,  poke_password).getSingleResult();
 		
 		HibernateUtil.closeSession();
 		

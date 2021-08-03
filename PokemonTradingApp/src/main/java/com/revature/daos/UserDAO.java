@@ -44,7 +44,7 @@ public class UserDAO implements UserDAOInterface {
 	public List<PokeUsers> getAllUsers() {
 		Session ses = HibernateUtil.getSession();
 		
-		List<PokeUsers> userList = ses.createQuery("FROM poke_users").list(); //at the end, we're turning the Query object into a List
+		List<PokeUsers> userList = ses.createQuery("FROM PokeUsers").list(); //at the end, we're turning the Query object into a List
 		
 		//warning is unimportant, it's complaining about conversion
 		//it wants a specific generic but it's not important. We could probably use casting to get rid of it

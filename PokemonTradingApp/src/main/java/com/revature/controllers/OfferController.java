@@ -118,15 +118,31 @@ public class OfferController {
 		
 	}
 	
-//	@SuppressWarnings("rawtypes")
-//	@PostMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
-//	public ResponseEntity updateOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
-//		
-//		if(req.getMethod().equals("POST")) {
-//			
-//		}
-//		return null;
-//		
-//	}
+	@SuppressWarnings("rawtypes")
+	@PostMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity updateOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+	if(req.getMethod().equals("POST")) {
+		
+			InventoryService is = new InventoryService();
+			OfferService os = new OfferService();
+			
+			
+			BufferedReader reader = req.getReader();
+			StringBuilder sb = new StringBuilder();
+			String line = reader.readLine();
+			
+			while(line != null) {
+				
+				sb.append(line);
+				line = reader.readLine();
+				
+			}
+			
+		
+	}
+	return null;
+	
 
+	}
 }
