@@ -19,9 +19,9 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		
 		Session session = HibernateUtil.getSession();
 		
-		List<OfferPool> currentOffers =  session.createQuery("FROM offer_pool").list();
+		List<OfferPool> currentOffers =  session.createQuery("FROM OfferPool").list();
 		HibernateUtil.closeSession();
-		// TODO Auto-generated method stub
+		System.out.println("I am returning list "+ currentOffers);
 		return currentOffers;
 	}
 

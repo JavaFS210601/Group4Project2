@@ -13,8 +13,14 @@ import { TransferServiceService } from 'src/app/services/transfer-service.servic
 })
 export class OpenTradesComponent implements OnInit {
   public pokemon: any = null;
+
+  userdata:any=[null,null,null,null,null,null,null,null,null,null,null,null,null,null];
+
+  temp:any= this.getUserData();
+
+
   // holder =this.get
-  offerArray = this.getArray();
+  offerArray:any = [];
   constructor(private ps: PokeFetchService,
     private ts: TransferServiceService,
     private router: Router) {
@@ -28,8 +34,8 @@ export class OpenTradesComponent implements OnInit {
     let Array: any = [];
     let sprite = "";
     let name = "";
-    for (let i = 0; i < 13; i++) {
-      this.ps.getPokemonFromApi(i + 1).subscribe(
+    for(let i=0;i<this.userdata.length;i++){
+      this.ps.getPokemonFromApi(this.userdata[i].primary_inventory_id.poke_id_fk).subscribe(
 
         (data: Pokemon) => {
           this.pokemon = data;
@@ -37,8 +43,8 @@ export class OpenTradesComponent implements OnInit {
           name = this.pokemon.name;
           console.log(sprite);
           var offer = {
-            id: i + 1,
-            user: i + 1,
+            id: this.userdata[i].offer_pool_id,
+            user: this.userdata[i].primary_inventory_id.user_id_fk,
             pokemon: name,
             objsprites: sprite
           }
@@ -53,6 +59,22 @@ export class OpenTradesComponent implements OnInit {
     return Array;
 
   }
+
+
+  async getUserData(){
+  let url="http://localhost:8090/poketrade/";
+  console.log("I am coming to get user data")
+   var response = await fetch(url+'offer');  
+   
+   if(response.status==200){
+     this.userdata= await response.json();
+     
+     this.offerArray= this.getArray();
+      console.log("I have got user data")
+     
+     
+   }
+}
 
   open(offer: any) {
     this.ts.setData(offer);

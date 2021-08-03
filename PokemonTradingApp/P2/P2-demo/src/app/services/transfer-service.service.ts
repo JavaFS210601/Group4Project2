@@ -13,7 +13,7 @@ export class TransferServiceService {
   }
 
   getData() {
-    console.log(this.data);
+  
     return this.data;
   }
 

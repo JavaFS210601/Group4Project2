@@ -64,7 +64,6 @@ export class SingleTradeComponent implements OnInit {
     this.router.navigate(['home/inventory']);
 
     
+  }
 
-
-}
 }

@@ -40,7 +40,7 @@ public class OfferController {
 	
 	
 	@SuppressWarnings("rawtypes")
-	@GetMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
+	@GetMapping 
 	public ResponseEntity getOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		
 		if(req.getMethod().equals("GET")) {
@@ -52,6 +52,8 @@ public class OfferController {
 //			CurrentUser currentUser = currentUserDao.getCurrentUser();
 			
 			List<OfferPool> offer = os.getOffer();
+			
+			System.out.println("in the controller the list is  " +  offer);
 			
 //			if(inventory != null) {
 //				System.out.println("getting data from database");
