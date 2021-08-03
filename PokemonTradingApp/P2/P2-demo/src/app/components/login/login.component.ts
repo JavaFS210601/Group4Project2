@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  usern: string = "username";
-  userp: string = "password";
+  usern: string = "";
+  userp: string = "";
 
 
   constructor(public router: Router) { }
@@ -22,29 +22,20 @@ export class LoginComponent implements OnInit {
     let url="http://localhost:8090/poketrade/";
 
     let user = {
-     poke_username: this.usern,
-     poke_password: this.userp
+      poke_username: this.usern,
+      poke_password: this.userp
     }
-
-  
-    // if (user.password == "password" && user.username == "username"){
-    //  this.router.navigate(['home']);
-    // }
-
-    //josiah login work around
-    // if(this.usern==='username' && this.userp==='password'){
-    //   console.log("success!");
-    //   this.router.navigate(['home']);
-    // }
+    console.log(JSON.stringify(user));
 
     let response = await fetch(url + "login", {
 
       method: "POST",
-
-     body: JSON.stringify(user)
+      
+      body: JSON.stringify(user)
      
 
     });
+    
 
     if (response.status === 200) {
       this.router.navigate(['home']);
@@ -52,7 +43,7 @@ export class LoginComponent implements OnInit {
     }
     else {
       console.log(response.status);
-       console.log("failed");
+      console.log("failed");
     }
 
 

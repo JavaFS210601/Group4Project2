@@ -12,9 +12,8 @@ import { TransferServiceService } from 'src/app/services/transfer-service.servic
 export class PokeResultComponent implements OnInit {
 
   pokemon = this.ts.getData();
-
   username:string = "";
-
+  //input = 56;  //this.ts.getData().poke.input;
 
   constructor(private ts: TransferServiceService,
     private ps: PokeFetchService,
@@ -42,7 +41,6 @@ export class PokeResultComponent implements OnInit {
     //)
   }
 
-
   async send(poke: any) {
     let url="http://localhost:8090/poketrade/";
      let invetory = {
@@ -67,7 +65,7 @@ export class PokeResultComponent implements OnInit {
       console.log(response.status);
       console.log("failed");
     }
+    this.router.navigate(['home/inventory']);
+  }
 
-
-}
 }
