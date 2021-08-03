@@ -18,7 +18,7 @@ public interface OfferPoolDAOInterface {
 	
 	public boolean newOffer(OfferPool addOffer);
 	
-	public void replyOffer(OfferPool addToOffer, InventoryJoin replyOffer);
+	public boolean replyOffer(OfferPool addToOffer, InventoryJoin replyOffer);
 	
 	public List<OfferPool> getOffersByStatus(int offerStatus);
 	

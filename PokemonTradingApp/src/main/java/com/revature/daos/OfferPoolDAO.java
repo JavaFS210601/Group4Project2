@@ -73,7 +73,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 	}
 
 	@Override
-	public void replyOffer(OfferPool addToOffer, InventoryJoin replyOffer) {
+	public boolean replyOffer(OfferPool addToOffer, InventoryJoin replyOffer) {
 		
 		Session session = HibernateUtil.getSession();
 		
@@ -81,7 +81,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		
 		session.merge(addToOffer);
 		HibernateUtil.closeSession();
-
+		return true;
 	}
 
 	@Override

@@ -115,4 +115,17 @@ public class InventoryController {
 			return ResponseEntity.status(401).build();
 
 		}
+		
+		@SuppressWarnings("rawtypes")
+		@PostMapping
+		public ResponseEntity replyInventory(HttpServletRequest req, HttpServletResponse res) throws IOException{
+			
+			if(req.getMethod().equals("POST")) {
+				
+			}
+			
+			return null;
+			
+		}
+		
 }
