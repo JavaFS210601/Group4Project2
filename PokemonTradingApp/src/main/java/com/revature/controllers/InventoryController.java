@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.daos.CurrentUserDAO;
 import com.revature.daos.UserDAO;
 import com.revature.dto.InventoryDTO;
-import com.revature.models.CurrentUser;
 import com.revature.models.InventoryJoin;
 import com.revature.models.PokeStatus;
 import com.revature.models.PokeUsers;
@@ -91,7 +90,7 @@ public class InventoryController {
 		
 		@SuppressWarnings("rawtypes")
 		@GetMapping
-		public void getInventory(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		public ResponseEntity getInventory(HttpServletRequest req, HttpServletResponse res) throws IOException{
 			
 			if(req.getMethod().equals("GET")) {
 				
@@ -107,13 +106,13 @@ public class InventoryController {
 					System.out.println("getting data from database");
 				}
 				
-				String json = om.writeValueAsString(inventory);
-				res.getWriter().print(json);
-				res.setStatus(200);
+//				String json = om.writeValueAsString(inventory);
+//				res.getWriter().print(json);
+//				res.setStatus(200);
 				
-//				return ResponseEntity.status(200).body(inventory);
+				return ResponseEntity.status(200).body(inventory);
 			}
-//			return ResponseEntity.status(401).build();
+			return ResponseEntity.status(401).build();
 
 		}
 }

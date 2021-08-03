@@ -53,7 +53,7 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		Session session = HibernateUtil.getSession();
 		//offer.setStatus_status_id(newStatus);
 	
-	Query q = session.createQuery("UPDATE offer_pool SET offer_status_id = ?1 WHERE offer_pool_id = ?2").setParameter(1,  newStatus).setParameter(2, offer.getOffer_pool_id());
+		Query q = session.createQuery("UPDATE offer_pool SET offer_status_id = ?1 WHERE offer_pool_id = ?2").setParameter(1,  newStatus).setParameter(2, offer.getOffer_pool_id());
 		
 		HibernateUtil.closeSession();
 		
@@ -110,8 +110,17 @@ public class OfferPoolDAO implements OfferPoolDAOInterface{
 		HibernateUtil.closeSession();
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void updateOffer(OfferPool offer_status_id) {
 		
+		Session session = HibernateUtil.getSession();
 		
+		session.merge(offer_status_id);
+		
+		HibernateUtil.closeSession();
+
 	}
 
 }
