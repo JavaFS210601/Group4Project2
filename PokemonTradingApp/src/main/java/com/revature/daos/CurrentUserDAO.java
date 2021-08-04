@@ -2,6 +2,7 @@ package com.revature.daos;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.CurrentUser;
@@ -17,7 +18,17 @@ public class CurrentUserDAO implements CurrentUserDAOInterface{
 		
 		Session session = HibernateUtil.getSession();
 		
+		Transaction txn = session.beginTransaction();
+		
+//		Query q = session.createQuery("Insert into CurrentUser (poke_user_id, poke_username) values(?1, ?2)");
+//		
+//		q.setParameter(1, user.getPoke_user_id());
+//		q.setParameter(2, user.getPoke_username());
+//		
+//		q.executeUpdate();
 		session.save(user);
+		
+		txn.commit();
 		
 		HibernateUtil.closeSession();
 		
@@ -46,8 +57,11 @@ public class CurrentUserDAO implements CurrentUserDAOInterface{
 
 		Session session = HibernateUtil.getSession();
 		
+		Transaction txn = session.beginTransaction();
+		
 		Query q = session.createQuery("DELETE from CurrentUser");
-
+		q.executeUpdate();
+		txn.commit();
 		HibernateUtil.closeSession();
 		
 	}

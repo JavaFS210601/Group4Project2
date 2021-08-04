@@ -20,5 +20,7 @@ public interface InventoryDAOInterface {
 	
 	public void updateReplyInventory(InventoryJoin offer, OfferPool updateThis); 
 	
+	public void updateOwner(InventoryJoin inventory, int newUser);
+	
 	
 }

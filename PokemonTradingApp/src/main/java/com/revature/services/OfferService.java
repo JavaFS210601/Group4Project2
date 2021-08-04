@@ -56,4 +56,21 @@ public class OfferService {
 		
 	}
 
+	public boolean emptyOffer(int i) {
+		OfferPoolDAO offerDao = new OfferPoolDAO();
+		
+		offerDao.emptyOffer(i);
+		
+		return true;
+	}
+
+	public boolean acceptOffer(int offer_id) {
+		
+		OfferPoolDAO offerDao = new OfferPoolDAO();
+		
+		offerDao.acceptOffer(offer_id);
+		
+		return true;
+	}
+
 }

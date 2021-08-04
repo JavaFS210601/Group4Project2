@@ -32,9 +32,9 @@ public class InventoryService {
 		
 		System.out.println(currentUser);
 		
-		//PokeUsers user = userDao.getUserById(currentUser.getPoke_user_id());
+		PokeUsers user = userDao.getUserById(currentUser.getPoke_user_id());
 		
-		PokeUsers user = userDao.getUserById(1);
+		
 		
 		List<InventoryJoin> inventoryJoin = inventoryDao.getInventoriesByUser(user);
 		

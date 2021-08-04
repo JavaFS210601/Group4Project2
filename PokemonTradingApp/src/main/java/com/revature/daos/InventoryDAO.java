@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.InventoryJoin;
@@ -89,6 +90,33 @@ public class InventoryDAO implements InventoryDAOInterface{
 		
 		HibernateUtil.closeSession();
 
+	}
+
+	@Override
+	public void updateOwner(InventoryJoin inventory,int newUser) {
+		
+		System.out.println("I am changing the inventory "+ inventory.getInventory_id() +" the new user Id is :" +newUser);
+		
+		Session session = HibernateUtil.getSession();
+		
+		Transaction txn = session.beginTransaction();
+		
+		session.detach(inventory);
+		
+		inventory.setUser_id_fk(newUser);
+		
+		
+		session.update(inventory);
+				
+		
+//		Query q = session.createQuery("UPDATE OfferPool SET offer_status_id = ?1 WHERE offer_id = ?2").setParameter(1, i).setParameter(2, offerP.getOffer_pool_id());
+//		
+//		q.executeUpdate();
+//		
+		txn.commit();
+		
+		HibernateUtil.closeSession();
+		
 	}
 	
 	

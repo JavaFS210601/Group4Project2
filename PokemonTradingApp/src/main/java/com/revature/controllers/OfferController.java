@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.daos.InventoryDAO;
+import com.revature.daos.OfferPoolDAO;
 import com.revature.daos.UserDAO;
+import com.revature.dto.EmptyOfferDTO;
 import com.revature.dto.OfferDTO;
 import com.revature.dto.ReplyOfferDTO;
 import com.revature.models.InventoryJoin;
@@ -72,7 +74,7 @@ public class OfferController {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@PostMapping (consumes = MediaType.TEXT_PLAIN_VALUE)
+	@PostMapping (value="/addoffer",consumes = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity addOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		
 		if(req.getMethod().equals("POST")) {
@@ -98,14 +100,16 @@ public class OfferController {
 			
 			OfferDTO offerDto = om.readValue(body, OfferDTO.class);
 			
+			System.out.println("Printing offerDto "+offerDto);
+			
 			OfferStatus status = new OfferStatus(1, "Open");
 			
 			InventoryDAO inventoryDao = new InventoryDAO();
 			
 			InventoryJoin inventoryJoin = inventoryDao.getInventoryById(offerDto.getInventory_id());
-			InventoryJoin inventoryJoins = null;
 			
-			OfferPool offerPool = new OfferPool(inventoryJoin, inventoryJoins, status);
+			
+			OfferPool offerPool = new OfferPool(inventoryJoin, null, status);
 			
 			if(os.newOffer(offerPool)) {
 				
@@ -142,9 +146,19 @@ public class OfferController {
 			
 			String body = new String(sb);
 			
+			System.out.println(body);
+			
 			ReplyOfferDTO replyOffer = om.readValue(body, ReplyOfferDTO.class);
 			
 			if(os.replyOffer(replyOffer)) {
+				
+				OfferPoolDAO offerdao = new OfferPoolDAO();
+				
+				int offerId= replyOffer.getOffer_id();
+				
+				OfferPool offer = offerdao.getOfferByID(offerId);
+				
+				offerdao.updateOfferPending(offer);
 				
 				return ResponseEntity.status(200).build();	
 			}
@@ -156,4 +170,110 @@ public class OfferController {
 	
 
 	}
+	
+	
+	@SuppressWarnings("rawtypes")
+	@PostMapping (value = "/declineoffer", consumes = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity emptyOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+		
+		OfferService os = new OfferService();
+		BufferedReader reader = req.getReader();
+		StringBuilder sb = new StringBuilder();
+		String line = reader.readLine();
+		
+		while(line != null) {
+			
+			sb.append(line);
+			line = reader.readLine();
+			
+		}
+		
+		String body = new String(sb);
+		
+		EmptyOfferDTO offer = om.readValue(body, EmptyOfferDTO.class);
+		
+		
+		if(os.emptyOffer(offer.getOffer_id())) {
+			return ResponseEntity.status(200).build();	
+		}
+		
+		
+		
+		
+		return ResponseEntity.status(401).build();
+		
+		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@PostMapping (value = "/acceptoffer", consumes = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity acceptOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+		OfferService os = new OfferService();
+		InventoryDAO inventoryDao = new InventoryDAO();
+		OfferPoolDAO offerdao= new OfferPoolDAO();
+		BufferedReader reader = req.getReader();
+		StringBuilder sb = new StringBuilder();
+		String line = reader.readLine();
+		
+		while(line != null) {
+			
+			sb.append(line);
+			line = reader.readLine();
+			
+		}
+		
+		String body = new String(sb);
+		EmptyOfferDTO offer = om.readValue(body, EmptyOfferDTO.class);
+		
+		if(os.acceptOffer(offer.getOffer_id())) {
+			
+			
+			System.out.println("Hello I am coming into the if statement");
+			
+			OfferPool acceptedOffer=offerdao.getOfferByID(offer.getOffer_id());
+			
+			System.out.println("Accepted offer is "+acceptedOffer);
+			
+			int primaryuserID = acceptedOffer.getPrimary_inventory_id().getUser_id_fk();
+			
+			int primaryinventoryID= acceptedOffer.getPrimary_inventory_id().getInventory_id();
+			
+	
+			
+			InventoryJoin primaryInventory = inventoryDao.getInventoryById(primaryinventoryID);
+			
+			System.out.println("Primary inventory is "+primaryInventory);
+			
+			int replyuserID = acceptedOffer.getReply_inventory_id().getUser_id_fk();
+			
+			int replyinventoryID =acceptedOffer.getReply_inventory_id().getInventory_id();
+			
+			
+			
+			InventoryJoin replyInventory = inventoryDao.getInventoryById(replyinventoryID);
+			
+			System.out.println("Reply Inventory is "+replyInventory);
+			
+			inventoryDao.updateOwner(primaryInventory, replyuserID);
+		
+		inventoryDao.updateOwner(replyInventory,primaryuserID );
+			
+			
+			
+			
+			
+			return ResponseEntity.status(200).build();	
+		}
+		
+	
+		return ResponseEntity.status(401).build();
+		
+	}
+		
+		
+		
+	
+	
 }

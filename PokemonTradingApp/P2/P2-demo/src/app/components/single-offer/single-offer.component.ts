@@ -12,12 +12,18 @@ import { TransferServiceService } from 'src/app/services/transfer-service.servic
 export class SingleOfferComponent implements OnInit {
 
   public pokemon: any = null;
-  inventory = this.getInventory();
+  inventory:any = [];
+
+  
+
+  userdata:any=[null,null,null,null,null,null,null,null,null,null,null,null,null,null];
   selectedValue: number = 0;
   username: string = "";
   hiddenValue: boolean = false;
   hiddenValue2: boolean = true;
   offer: any = this.ts.getData();
+
+  temp:any= this.getUserData();
 
   
   constructor(private ps: PokeFetchService,
@@ -33,23 +39,52 @@ export class SingleOfferComponent implements OnInit {
     this.hiddenValue2 = false;
   }
 
-  submitOffer() {
-    console.log("hello")
-    console.log(this.username);
-    console.log(this.selectedValue);
+   async submitOffer() {
+     let url="http://localhost:8090/poketrade/";
+     
+     for(let i=0;i<this.userdata.length;i++){
+       if(this.userdata[i].inventory_id==this.selectedValue){
+         console.log(this.userdata[i]);
+
+         let sendinginventory = this.userdata[i];
+         let replyOffer={
+           offer_id: this.offer.id,
+           inventory: sendinginventory
+         }
+
+         
+        let response = await fetch(url + "offer/replyoffer", {
+
+       method: "POST",
+      
+       body: JSON.stringify(replyOffer)
+     
+
+      });
+      if (response.status === 200) {
+      console.log("Success")
+
+
+    }
+    else {
+      console.log(response.status);
+      console.log("failed");
+    }
+     }
+     }
   }
 
   getInventory(): any[] {
     let Array: any = [];
     let name: string = "";
-    for (let i = 0; i < 9; i++) {
-      this.ps.getPokemonFromApi(i + 1).subscribe(
+    for(let i=0;i<this.userdata.length;i++){
+      this.ps.getPokemonFromApi(this.userdata[i].poke_id_fk).subscribe(
 
         (data: Pokemon) => {
           this.pokemon = data;
 
           var poke = {
-            value: i + 1,
+            value: this.userdata[i].inventory_id,
             name: this.pokemon.name,
 
           }
@@ -63,6 +98,21 @@ export class SingleOfferComponent implements OnInit {
     }
     return Array;
   }
+
+  async getUserData(){
+  let url="http://localhost:8090/poketrade/";
+  console.log("I am coming to get user data")
+   var response = await fetch(url+'inventory');  
+   
+   if(response.status==200){
+     this.userdata= await response.json();
+     
+     this.inventory= this.getInventory();
+      console.log("I have got user data")
+     
+     
+   }
+}
 
 }
 

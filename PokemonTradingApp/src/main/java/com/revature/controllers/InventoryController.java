@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.daos.CurrentUserDAO;
 import com.revature.daos.UserDAO;
 import com.revature.dto.InventoryDTO;
+import com.revature.models.CurrentUser;
 import com.revature.models.InventoryJoin;
 import com.revature.models.PokeStatus;
 import com.revature.models.PokeUsers;
@@ -98,9 +99,9 @@ public class InventoryController {
 				InventoryService is = new InventoryService();
 				CurrentUserDAO currentUserDao = new CurrentUserDAO();
 				
-//				CurrentUser currentUser = currentUserDao.getCurrentUser();
+				CurrentUser currentUser = currentUserDao.getCurrentUser();
 				
-				List<InventoryJoin> inventory = is.getInventory(null);
+				List<InventoryJoin> inventory = is.getInventory(currentUser);
 				
 				if(inventory != null) {
 					System.out.println("getting data from database");

@@ -34,20 +34,20 @@ export class SingleTradeComponent implements OnInit {
 
   async submitTrade() {
 
-    let offer:any = this.ts.getData;
+  
     
      let url="http://localhost:8090/poketrade/";
-     let trade = {
+     let offer = {
       
-      inventory_id: offer.id,
-      poke_id: offer.pokedexId
+      inventory_id: this.trade.id,
+      poke_id: this.trade.pokedexId
 
     }
-    let response = await fetch(url + "offer", {
+    let response = await fetch(url + "offer/addoffer", {
 
       method: "POST",
       
-      body: JSON.stringify(trade)
+      body: JSON.stringify(offer)
      
 
     });

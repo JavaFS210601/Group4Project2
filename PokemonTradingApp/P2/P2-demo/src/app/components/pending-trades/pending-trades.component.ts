@@ -9,7 +9,7 @@ import { Pokemon } from 'src/app/models/pokemon';
 })
 export class PendingTradesComponent implements OnInit {
   decision: number = 0;
-  offerId: number = 0;
+  offerID: number = 0;
   public pokemon: any = null;
   // holder =this.get
   offerArray = this.getArray();
@@ -73,9 +73,49 @@ export class PendingTradesComponent implements OnInit {
     this.decision = entry;
   }
 
-  submit() {
-    console.log(this.decision);
-    console.log(this.offerId);
+  async submit() {
+
+     let url="http://localhost:8090/poketrade/";
+
+     let data={
+       offer_id:this.offerID
+     }
+    if(this.decision===1){
+      let response=  await fetch(url + "offer/acceptoffer",{
+         method: "POST",
+      
+      body: JSON.stringify(data)
+      });
+
+      if (response.status === 200) {
+      console.log("Success")
+
+
+    }
+    else {
+      console.log(response.status);
+      console.log("failed");
+    }
+    }
+    else if(this.decision===2){
+      let response=  await fetch(url + "offer/declineoffer",{
+         method: "POST",
+      
+      body: JSON.stringify(data)
+      });
+
+      if (response.status === 200) {
+      console.log("Success")
+
+
+    }
+    else {
+      console.log(response.status);
+      console.log("failed");
+    }
+
+
+    }
   }
 
 }
