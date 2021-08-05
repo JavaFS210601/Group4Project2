@@ -1,13 +1,20 @@
 <app-poke-banner></app-poke-banner>
+<div style="text-align: center;">
+    <h1 style="display: block;">My Inventory</h1>
+</div>
 
 
 <div id="grid-container" >
+    
+    <br>
+    <br>
     <div *ngFor="let inventoryInfo of inventoryArray" class="inventory-card" >
         <img src={{inventoryInfo.objsprites}}>
         <p>Inventory ID: {{inventoryInfo.id}}</p>
         <p>Pokedex ID: {{inventoryInfo.pokedexId}}</p>
         <p style = "text-transform:capitalize;">Pokemon Name: {{inventoryInfo.pokemon}}</p>
-        <button (click)="open(inventoryInfo)" class="button">Trade</button>
+        
+        <button  (click)="open(inventoryInfo)" class="button">Trade</button>
     </div>
 
     <!--<ng-template [ngIf]="newPokemon != null"> 

@@ -62,6 +62,7 @@ export class SingleOfferComponent implements OnInit {
 
       });
       if (response.status === 200) {
+        alert("Counter Offer Added");
       console.log("Success")
 
 

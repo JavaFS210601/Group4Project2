@@ -21,6 +21,13 @@ input[type="number"]::-webkit-outer-spin-button {
   display: block;
 }
 
+#logout {
+  margin-left: 90vw;
+  background-color: #42b72a;
+  width: 150px;
+  margin-top: 25px;
+}
+
 #header {
   margin-top: 30px;
 }

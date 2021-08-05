@@ -3,6 +3,7 @@ package com.revature.controllers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.daos.CurrentUserDAO;
 import com.revature.daos.InventoryDAO;
 import com.revature.daos.OfferPoolDAO;
 import com.revature.daos.UserDAO;
 import com.revature.dto.EmptyOfferDTO;
 import com.revature.dto.OfferDTO;
 import com.revature.dto.ReplyOfferDTO;
+import com.revature.models.CurrentUser;
 import com.revature.models.InventoryJoin;
 import com.revature.models.OfferPool;
 import com.revature.models.OfferStatus;
@@ -72,7 +75,136 @@ public class OfferController {
 		
 		
 	}
+	
+	
+	@SuppressWarnings("rawtypes")
+	@GetMapping(value ="/userpastoffer") 
+	public ResponseEntity getuserPastOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+		if(req.getMethod().equals("GET")) {
+			OfferService os = new OfferService();
+			List<OfferPool> offer = os.getOffer();
+			
+			CurrentUserDAO currentUserDao = new CurrentUserDAO();
+			CurrentUser currentUser = currentUserDao.getCurrentUser();
+			
+			InventoryService is = new InventoryService();
+			
+			List<InventoryJoin> inventory = is.getInventory(currentUser);
+			
+			List<OfferPool> finaloffer= new ArrayList<OfferPool>();
+			
+			for(int i=0;i<offer.size();i++) {
+				OfferPool temp= offer.get(i);
+				
+				if(temp.getOffer_status_id().getOffer_status_id()==3) {
+					int offerInventoryId= temp.getReply_inventory_id().getInventory_id();
+					for(int j=0;j<inventory.size();j++) {
+						InventoryJoin temp2 = inventory.get(j);
+						int id1= temp2.getInventory_id();
+						if(id1==offerInventoryId) {
+							finaloffer.add(temp);
+						}
+					}
+				}
+				
+			}
+			
+			return ResponseEntity.status(200).body(finaloffer);
+			
+			
+		}
+		
+		return ResponseEntity.status(401).build();
+	}
 
+	
+	@SuppressWarnings("rawtypes")
+	@GetMapping(value ="/userpendingoffer") 
+	public ResponseEntity getuserPendingOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+		if(req.getMethod().equals("GET")) {
+			OfferService os = new OfferService();
+			List<OfferPool> offer = os.getOffer();
+			
+			CurrentUserDAO currentUserDao = new CurrentUserDAO();
+			CurrentUser currentUser = currentUserDao.getCurrentUser();
+			
+			InventoryService is = new InventoryService();
+			
+			List<InventoryJoin> inventory = is.getInventory(currentUser);
+			
+			List<OfferPool> finaloffer= new ArrayList<OfferPool>();
+			
+			for(int i=0;i<offer.size();i++) {
+				OfferPool temp= offer.get(i);
+				int offerInventoryId= temp.getPrimary_inventory_id().getInventory_id();
+				if(temp.getOffer_status_id().getOffer_status_id()==2) {
+					
+					for(int j=0;j<inventory.size();j++) {
+						InventoryJoin temp2 = inventory.get(j);
+						int id1= temp2.getInventory_id();
+						if(id1==offerInventoryId) {
+							finaloffer.add(temp);
+						}
+					}
+				}
+				
+			}
+			
+			return ResponseEntity.status(200).body(finaloffer);
+			
+			
+		}
+		
+		return ResponseEntity.status(401).build();
+	}
+	
+	
+	
+	@SuppressWarnings("rawtypes")
+	@GetMapping(value ="/useropenoffer") 
+	public ResponseEntity getuserOpenOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		
+		if(req.getMethod().equals("GET")) {
+			OfferService os = new OfferService();
+			List<OfferPool> offer = os.getOffer();
+			
+			CurrentUserDAO currentUserDao = new CurrentUserDAO();
+			CurrentUser currentUser = currentUserDao.getCurrentUser();
+			
+			InventoryService is = new InventoryService();
+			
+			List<InventoryJoin> inventory = is.getInventory(currentUser);
+			
+			List<OfferPool> finaloffer= new ArrayList<OfferPool>();
+			
+			for(int i=0;i<offer.size();i++) {
+				OfferPool temp= offer.get(i);
+				int offerInventoryId= temp.getPrimary_inventory_id().getInventory_id();
+				if(temp.getOffer_status_id().getOffer_status_id()==1) {
+					
+					for(int j=0;j<inventory.size();j++) {
+						InventoryJoin temp2 = inventory.get(j);
+						int id1= temp2.getInventory_id();
+						if(id1==offerInventoryId) {
+							finaloffer.add(temp);
+						}
+					}
+				}
+				
+			}
+			
+			return ResponseEntity.status(200).body(finaloffer);
+			
+			
+		}
+		
+		return ResponseEntity.status(401).build();
+	}
+	
+	
+	
 	@SuppressWarnings("rawtypes")
 	@PostMapping (value="/addoffer",consumes = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity addOffer(HttpServletRequest req, HttpServletResponse res) throws IOException{

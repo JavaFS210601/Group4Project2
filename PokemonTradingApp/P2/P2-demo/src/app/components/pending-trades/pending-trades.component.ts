@@ -11,8 +11,15 @@ export class PendingTradesComponent implements OnInit {
   decision: number = 0;
   offerID: number = 0;
   public pokemon: any = null;
+   public pokemon2:any =null;
+
+   userdata:any=[null,null,null,null,null,null,null,null,null,null,null,null,null,null];
+
+   temp:any= this.getUserData();
+
   // holder =this.get
-  offerArray = this.getArray();
+   offerArray:any = [];
+  // holder =this.get
   hiddenValue: boolean = true;
   constructor(private ps: PokeFetchService) { }
 
@@ -22,41 +29,46 @@ export class PendingTradesComponent implements OnInit {
     let Array: any = [];
     let sprite = "";
     let name = "";
-    if (true) { this.hiddenValue = true; }
 
+    for(let i=0;i<this.userdata.length;i++){
 
-    for (let i = 0; i <= 6; i = i + 1) {
-
-
+      this.hiddenValue = true;
 
       var secondary = "";
       var offered = "";
-      this.ps.getPokemonFromApi(i + 100).subscribe(
+      this.ps.getPokemonFromApi(this.userdata[i].primary_inventory_id.poke_id_fk).subscribe(
 
         (data: Pokemon) => {
           this.pokemon = data;
 
           name = this.pokemon.name;
           console.log(name);
-          if (i % 2 == 0) {
-            secondary = "Misty";
-            offered = "Charizard";
-          }
-          else {
-            secondary = "Brock";
-            offered = "Onix";
-          }
+          
+            secondary = this.userdata[i].reply_inventory_id.user_id_fk;
 
-          var offer = {
-            id: i + 1,
-            user: "Ash",
+
+            this.ps.getPokemonFromApi(this.userdata[i].reply_inventory_id.poke_id_fk).subscribe( (data: Pokemon) => {
+
+               this.pokemon2 = data;
+
+          offered = this.pokemon2.name;
+
+            var offer = {
+            id: this.userdata[i].offer_pool_id,
+            user:this.userdata[i].primary_inventory_id.user_id_fk ,
             pokemon: name,
-            second: secondary,
+            second: this.userdata[i].reply_inventory_id.user_id_fk,
             offeredPoke: offered
 
           }
           Array[i] = offer;
 
+            },
+            () => {
+          this.pokemon = null;
+          console.log("Something is wrong I can feel it (pokemon retrieval).");
+        }
+        )
         },
         () => {
           this.pokemon = null;
@@ -88,6 +100,7 @@ export class PendingTradesComponent implements OnInit {
       });
 
       if (response.status === 200) {
+      alert("Offer Accepted!");
       console.log("Success")
 
 
@@ -105,6 +118,7 @@ export class PendingTradesComponent implements OnInit {
       });
 
       if (response.status === 200) {
+        alert("Offer Rejected!");
       console.log("Success")
 
 
@@ -117,5 +131,20 @@ export class PendingTradesComponent implements OnInit {
 
     }
   }
+
+  async getUserData(){
+  let url="http://localhost:8090/poketrade/";
+  console.log("I am coming to get user data")
+   var response = await fetch(url+'offer/userpendingoffer');  
+   
+   if(response.status==200){
+     this.userdata= await response.json();
+     
+     this.offerArray= this.getArray();
+      console.log("I have got user data")
+     
+     
+   }
+}
 
 }

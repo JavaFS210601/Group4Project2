@@ -15,8 +15,16 @@ export class MyOpenTradesComponent implements OnInit {
   headerHidden: boolean = true;
   buttonHidden: boolean = false;
   public pokemon: any = null;
+  public pokemon2:any =null;
+
+   userdata:any=[null,null,null,null,null,null,null,null,null,null,null,null,null,null];
+
+   temp:any= this.getUserData();
+
   // holder =this.get
-  offerArray = this.getArray();
+   offerArray:any = [];
+  // holder =this.get
+ 
   constructor(private ps: PokeFetchService) { }
 
   ngOnInit(): void {
@@ -26,30 +34,32 @@ export class MyOpenTradesComponent implements OnInit {
     let sprite = "";
     let name = "";
 
+    for(let i=0;i<this.userdata.length;i++){
 
-
-    for (let i = 0; i <= 6; i = i + 1) {
-
-
+     console.log("OPen trade getting")
 
       var secondary = "";
       var offered = "";
-      this.ps.getPokemonFromApi(i + 1).subscribe(
+      this.ps.getPokemonFromApi(this.userdata[i].primary_inventory_id.poke_id_fk).subscribe(
 
         (data: Pokemon) => {
           this.pokemon = data;
 
           name = this.pokemon.name;
           console.log(name);
+           var offer = {
+            id: this.userdata[i].offer_pool_id,
+            user:this.userdata[i].primary_inventory_id.user_id_fk ,
+            pokemon: name
 
-
-          var offer = {
-            id: i + 1,
-            user: "Ash",
-            pokemon: name,
           }
           Array[i] = offer;
 
+          
+           
+
+
+           
         },
         () => {
           this.pokemon = null;
@@ -73,5 +83,20 @@ export class MyOpenTradesComponent implements OnInit {
   onChange(entry: number): void {
     this.decision = entry;
   }
+
+  async getUserData(){
+  let url="http://localhost:8090/poketrade/";
+  console.log("I am coming to get user data")
+   var response = await fetch(url+'offer/useropenoffer');  
+   
+   if(response.status==200){
+     this.userdata= await response.json();
+     
+     this.offerArray= this.getArray();
+      console.log("I have got user data")
+     
+     
+   }
+}
 
 }

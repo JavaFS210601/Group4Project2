@@ -34,7 +34,11 @@ export class OpenTradesComponent implements OnInit {
     let Array: any = [];
     let sprite = "";
     let name = "";
+    let j=0;
     for(let i=0;i<this.userdata.length;i++){
+
+      if(this.userdata[i].offer_status_id.offer_status_id==1){
+      
       this.ps.getPokemonFromApi(this.userdata[i].primary_inventory_id.poke_id_fk).subscribe(
 
         (data: Pokemon) => {
@@ -48,13 +52,16 @@ export class OpenTradesComponent implements OnInit {
             pokemon: name,
             objsprites: sprite
           }
-          Array[i] = offer;
+          console.log(this.userdata[i].offer_status_id.offer_status_id)
+          Array[j] = offer;
+          j++;
         },
         () => {
           this.pokemon = null;
           console.log("Something is wrong I can feel it (pokemon retrieval).");
         }
       )
+      }
     }
     return Array;
 

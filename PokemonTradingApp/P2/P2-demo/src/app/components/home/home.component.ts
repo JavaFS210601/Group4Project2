@@ -43,4 +43,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['pokeresult']);
   }
 
+  logout(){
+    this.router.navigate(['']);
+  }
+
 }
